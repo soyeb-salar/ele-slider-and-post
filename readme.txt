@@ -1,66 +1,97 @@
 === Ele Slider and Post ===
-Contributors: soyebsalar  
-Tags: Elementor, Slider, Post Widgets, Custom Widgets  
-Requires at least: 5.9  
-Tested up to: 6.4  
-Requires PHP: 7.4  
-Stable tag: 1.0  
-License: GPLv3  
-License URI: https://www.gnu.org/licenses/gpl-3.0.html  
+Author: Soyeb Salar
+Contributors: soyebsalar
+Donate link: https://soyebsalar.in/donate/
+Tags: elementor, slider, post, widget
+Requires at least: 5.6
+Tested up to: 6.7
+Requires PHP: 7.0
+Stable tag: 1.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Ele Slider and Post Plugin adds highly customizable slider and post display widgets to Elementor, empowering you to design visually stunning and interactive layouts.
+Ele Slider and Post is a versatile Elementor add-on with two widgets: **Ele Slider** and **Ele Post** for easy integration of sliders and post displays.
+
 
 == Description ==
 
-**Ele Slider and Post Plugin** is a powerful extension for Elementor that introduces two new widgets:  
-- **Ele Slider**: Create fully customizable sliders with images, titles, descriptions, and buttons.  
-- **Ele Post**: Display posts dynamically with advanced styling and filtering options.
+Ele Slider and Post is a versatile WordPress Elementor add-on plugin that provides two useful widgets: **Ele Slider** and **Ele Post**. These widgets allow you to easily create beautiful and dynamic sliders and post displays within your Elementor layouts.
 
-Key Features:
-- Add dynamic slides with individual background images, titles, descriptions, and button links.
-- Fully customizable dimensions for the slider.
-- Add post widgets to showcase blog posts or specific categories with styling options.
-- Navigation controls for sliders with custom icons.
-- Responsive design and easy-to-use settings.
+### Ele Slider Widget:
+- **Image**: Add an image to each slide with a customizable background.
+- **Title**: Display a title over the slide with various styling options.
+- **Description**: Include a description under the title, fully customizable.
+- **Button**: Add a button with text and link, fully customizable.
+- **Navigation**: Includes navigation buttons (next and previous).
+- **Box Shadow**: Add shadow to the slider with customizable color, opacity, horizontal and vertical offset, blur, and spread.
+
+### Ele Post Widget:
+- **Post Type**: Choose from default WordPress posts or custom post types.
+- **Category**: Filter posts by category.
+- **Post Metadata**: Display metadata like the date, author, etc.
+- **Box Shadow**: Add shadow to the posts with customizable color, opacity, horizontal and vertical offset, blur, and spread.
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/ele-slider-and-post/` directory or install the plugin directly from the WordPress plugins repository.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Open the Elementor editor and find the widgets **Ele Slider** and **Ele Post** in the widget panel.
-4. Drag and drop the widgets into your design and configure the settings.
+1. Upload the plugin folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Use the Ele Slider and Post widgets from Elementor.
 
 == Frequently Asked Questions ==
 
-= How do I set the slider dimensions? =  
-Use the slider settings in Elementor to define custom width and height. Default values are applied if left blank.
+= What is this plugin? =
 
-= Can I link slides to external URLs? =  
-Yes, you can add links to each slide button via the button link field.
+This plugin adds two Elementor widgets, **Ele Slider** and **Ele Post**, to enhance your content display options.
 
-= Is the plugin responsive? =  
-Absolutely! The widgets are fully responsive and adapt to all screen sizes.
+= How do I use the Ele Slider Widget? =
+
+1. Open the Elementor editor and add the **Ele Slider** widget.
+2. Customize your slides with images, titles, descriptions, and buttons.
+3. Style the widget using Elementor's design options.
+
+= How do I use the Ele Post Widget? =
+
+1. Open the Elementor editor and add the **Ele Post** widget.
+2. Select the post type and category.
+3. Customize the metadata and other settings.
 
 == Screenshots ==
 
-1. **Ele Slider Widget**: A preview of the Ele Slider widget in the Elementor editor.  
-2. **Ele Post Widget**: Customizable post display widget for showcasing blog posts.  
-3. **Global Styling Options**: Typography, color, and layout customization options.
+1. **Ele Slider Widget in Action**
+   ![Ele Slider Widget](https://example.com/path-to-your-screenshot1.jpg)
+   *Description*: This is how the Ele Slider widget looks in action with customizable slides and navigation buttons.
+
+2. **Ele Post Widget Displaying Posts**
+   ![Ele Post Widget](https://example.com/path-to-your-screenshot2.jpg)
+   *Description*: The Ele Post widget showing posts with metadata and box-shadow styling.
+
+3. **Ele Slider Box Shadow Example**
+   ![Box Shadow Example](https://example.com/path-to-your-screenshot3.jpg)
+   *Description*: A demonstration of how the box shadow settings are applied to the Ele Slider widget.
+
+4. **GIF Example for Ele Slider Widget Interaction**
+   ![Ele Slider Interaction](https://example.com/path-to-your-gif-example.gif)
+   *Description*: A GIF showing the slider in motion with smooth transitions.
+
+To add screenshots:
+
+- Place images (e.g., JPG, PNG) or GIF files in the `assets/screenshot/` folder in your plugin directory.
+- You can also use GIFs to show interactions or animations by uploading them to the `assets/screenshot/` folder and referencing them in the readme.
+
+*Example*:
+
+- Screenshot 1: `assets/screenshot/screenshot1.jpg`
+- Screenshot 2: `assets/screenshot/screenshot2.gif`
 
 == Changelog ==
 
-= 1.0 =  
-* Initial Release  
-* Added **Ele Slider** widget with customizable slides, navigation buttons, and global styles.  
-* Added **Ele Post** widget for post display with advanced filtering and styling.  
+= 1.0 =
+* Initial release of Ele Slider and Post widget plugin.
 
 == Upgrade Notice ==
 
-= 1.0 =  
-Initial release. Update for access to new widgets and features.
+No upgrade notices for this version.
 
 == Support ==
 
-For any issues, suggestions, or feature requests:  
-**Email**: soyebsalar@gmail.com  
-**GitHub**: https://github.com/soyeb-salar/ele-slider-and-post
+For support or feature requests, please contact Soyeb Salar at soyebsalar@gmail.com.

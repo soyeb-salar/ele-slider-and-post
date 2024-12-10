@@ -16,8 +16,8 @@
     transform: translate(-50%, -50%); */
     width: 1000px;
     height: 600px;
-    background: #f5f5f5;
-    box-shadow: 0 30px 50px #dbdbdb;
+    /* background: #f5f5f5;
+    box-shadow: 0 30px 50px #dbdbdb; */
 }
 
 .ele-container .ele-slide .ele-item{

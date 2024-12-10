@@ -13,7 +13,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_categories() {
-        return [ 'basic' ];
+        return [ 'ele-kit' ];
     }
 
     public function get_script_depends() {
@@ -292,6 +292,80 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
+        // Box Shadow Section for Slider
+$this->start_controls_section(
+    'slider_shadow_section',
+    [
+        'label' => __( 'Box Shadow', 'ele-slider-and-post' ),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+    ]
+);
+
+$this->add_control(
+    'slider_shadow_color',
+    [
+        'label' => __( 'Shadow Color', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#505050',
+    ]
+);
+
+$this->add_control(
+    'slider_shadow_opacity',
+    [
+        'label' => __( 'Shadow Opacity', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::SLIDER,
+        'default' => [
+            'size' => 0.5,
+        ],
+        'range' => [
+            'px' => [
+                'min' => 0,
+                'max' => 1,
+                'step' => 0.1,
+            ],
+        ],
+    ]
+);
+
+$this->add_control(
+    'slider_shadow_horizontal',
+    [
+        'label' => __( 'Horizontal Offset', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 0,
+    ]
+);
+
+$this->add_control(
+    'slider_shadow_vertical',
+    [
+        'label' => __( 'Vertical Offset', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 30,
+    ]
+);
+
+$this->add_control(
+    'slider_shadow_blur',
+    [
+        'label' => __( 'Blur Radius', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 50,
+    ]
+);
+
+$this->add_control(
+    'slider_shadow_spread',
+    [
+        'label' => __( 'Spread Radius', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 0,
+    ]
+);
+
+$this->end_controls_section();
+
     }
 
     protected function get_available_image_sizes() {
@@ -313,8 +387,20 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        $slides = $settings['slides'];      
-
+        $slides = $settings['slides'];    
+             // Box shadow properties
+             $shadow_color = $settings['slider_shadow_color'];
+             $shadow_opacity = isset($settings['slider_shadow_opacity']['size']) ? $settings['slider_shadow_opacity']['size'] : 0.5;
+             $slider_shadow_rgba = $this->hex_to_rgba($shadow_color, $shadow_opacity);
+             $box_slider_shadow = sprintf(
+                 '%spx %spx %spx %spx %s',
+                 $settings['slider_shadow_horizontal'],
+                 $settings['slider_shadow_vertical'],
+                 $settings['slider_shadow_blur'],
+                 $settings['slider_shadow_spread'],
+                 $slider_shadow_rgba
+             );  
+    
         if ( ! empty( $slides ) ) : ?>
             <div class="ele-container">
                 <div class="ele-slide">
@@ -323,25 +409,31 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
                         $title = $slide['slider_title'];
                         $description = $slide['slider_description'];
                         $button_text = $slide['button_text'];
-                        $button_link = $slide['button_link']['url']; // Fetch button URL
+                        $button_link = $slide['button_link']['url'];
                     ?>
-                    <div class="ele-item" style="background-image: url(<?php echo esc_url( $background_image ); ?>);">
+                    <div class="ele-item" style="background-image: url(<?php echo esc_url( $background_image ); ?>); box-shadow: <?php echo esc_attr($box_slider_shadow); ?>;">
                         <div class="ele-content">
-                            <div class="ele-name"><?php echo esc_html( $title ); ?></div>
-                            <div class="ele-des"><?php echo esc_html( $description ); ?></div>
-
+                            <div class="ele-name" style="<?php echo esc_attr( $this->get_render_attribute_string( 'title_style' ) ); ?>">
+                                <?php echo esc_html( $title ); ?>
+                            </div>
+                            <div class="ele-des" style="<?php echo esc_attr( $this->get_render_attribute_string( 'description_style' ) ); ?>">
+                                <?php echo esc_html( $description ); ?>
+                            </div>
                             <?php if ( $button_link ) : ?>
                                 <a href="<?php echo esc_url( $button_link ); ?>">
-                                    <button class="btnTitle"><?php echo esc_html( $button_text ); ?></button>
+                                    <button class="btnTitle" style="<?php echo esc_attr( $this->get_render_attribute_string( 'button_style' ) ); ?>">
+                                        <?php echo esc_html( $button_text ); ?>
+                                    </button>
                                 </a>
                             <?php else : ?>
-                                <button class="btnTitle"><?php echo esc_html( $button_text ); ?></button>
+                                <button class="btnTitle" style="<?php echo esc_attr( $this->get_render_attribute_string( 'button_style' ) ); ?>">
+                                    <?php echo esc_html( $button_text ); ?>
+                                </button>
                             <?php endif; ?>
                         </div>
                     </div>
                     <?php endforeach; ?>
                 </div>
-
                 <div class="button">
                     <button class="prev"><i class="icon icon-left-arrows"></i></button>
                     <button class="next"><i class="icon icon-right-arrow1"></i></button>
@@ -349,4 +441,17 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
             </div>
         <?php endif;
     }
+    private function hex_to_rgba($hex, $alpha = 1) {
+        $hex = str_replace('#', '', $hex);
+        if (strlen($hex) == 6) {
+            list($r, $g, $b) = array_map('hexdec', str_split($hex, 2));
+        } else {
+            list($r, $g, $b) = array_map('hexdec', str_split($hex, 1));
+            $r = $r * 17;
+            $g = $g * 17;
+            $b = $b * 17;
+        }
+        return "rgba($r, $g, $b, $alpha)";
+    }
+    
 }
