@@ -10,8 +10,7 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Ele Slider and Post is a versatile Elementor add-on with two widgets: **Ele Slider** and **Ele Post** for easy integration of sliders and post displays.
-
+Ele Slider and Post is an Elementor add-on with two widgets for adding sliders and displaying posts effortlessly.
 
 == Description ==
 
@@ -30,6 +29,8 @@ Ele Slider and Post is a versatile WordPress Elementor add-on plugin that provid
 - **Category**: Filter posts by category.
 - **Post Metadata**: Display metadata like the date, author, etc.
 - **Box Shadow**: Add shadow to the posts with customizable color, opacity, horizontal and vertical offset, blur, and spread.
+
+Watch the video demonstration for a detailed walkthrough: [https://www.youtube.com/watch?v=pnGpNQ-kwNs](https://youtu.be/pnGpNQ-kwNs?si=hZfMliPLVZQWG8Ki)
 
 == Installation ==
 
@@ -58,30 +59,40 @@ This plugin adds two Elementor widgets, **Ele Slider** and **Ele Post**, to enha
 == Screenshots ==
 
 1. **Ele Slider Widget in Action**
-   ![Ele Slider Widget](https://example.com/path-to-your-screenshot1.jpg)
-   *Description*: This is how the Ele Slider widget looks in action with customizable slides and navigation buttons.
+   ![Ele Slider Widget](screenshot-1.gif)
+   *Description*: A live preview of the Ele Slider widget in action, showcasing customizable slides with navigation buttons for a dynamic user experience.
 
-2. **Ele Post Widget Displaying Posts**
-   ![Ele Post Widget](https://example.com/path-to-your-screenshot2.jpg)
-   *Description*: The Ele Post widget showing posts with metadata and box-shadow styling.
+2. **Customizing Slides in Ele Slider Widget**
+   ![Ele Slider Customization](screenshot-2.jpg)
+   *Description*: Demonstrates how to customize slides in the Ele Slider widget, including adding images, titles, descriptions, and buttons.
 
-3. **Ele Slider Box Shadow Example**
-   ![Box Shadow Example](https://example.com/path-to-your-screenshot3.jpg)
-   *Description*: A demonstration of how the box shadow settings are applied to the Ele Slider widget.
+3. **Ele Post Widget Displaying Posts**
+   ![Ele Post Widget](screenshot-3.jpg)
+   *Description*: The Ele Post widget displays posts with metadata like author and date, enhanced by customizable box-shadow effects.
 
-4. **GIF Example for Ele Slider Widget Interaction**
-   ![Ele Slider Interaction](https://example.com/path-to-your-gif-example.gif)
-   *Description*: A GIF showing the slider in motion with smooth transitions.
+4. **How to Add Slides in Ele Slider**
+   ![Add Slides in Ele Slider](screenshot-4.jpg)
+   *Description*: Step-by-step guide on adding new slides with images, titles, and buttons in the Ele Slider widget.
 
-To add screenshots:
+5. **Ele Slider with Titles, Descriptions, Buttons, and Images**
+   ![Ele Slider with Elements](screenshot-5.jpg)
+   *Description*: A detailed look at how the Ele Slider widget integrates multiple elements, such as titles, descriptions, buttons, and images, for an enriched display.
 
-- Place images (e.g., JPG, PNG) or GIF files in the `assets/screenshot/` folder in your plugin directory.
-- You can also use GIFs to show interactions or animations by uploading them to the `assets/screenshot/` folder and referencing them in the readme.
+6. **Global Settings for Ele Slider**
+   ![Global Settings for Slider](screenshot-6.jpg)
+   *Description*: Explores the global settings available for the Ele Slider widget, including box-shadow, slider dimensions, and typography options.
 
-*Example*:
+7. **Ele Post Widget with Custom Post Types**
+   ![Ele Post with CPT](screenshot-7.jpg)
+   *Description*: Demonstrates how the Ele Post widget can display content from custom post types, allowing for versatile content layouts.
 
-- Screenshot 1: `assets/screenshot/screenshot1.jpg`
-- Screenshot 2: `assets/screenshot/screenshot2.gif`
+8. **Typography and Box Shadow Settings for Ele Slider**
+   ![Typography and Shadow](screenshot-8.jpg)
+   *Description*: Highlights typography and box-shadow settings in the Ele Slider widget, enabling precise control over text and design aesthetics.
+
+9. **Adding Ele Slider and Post Widgets in Elementor**
+   ![Adding Widgets in Elementor](screenshot-9.jpg)
+   *Description*: A tutorial showing how to add the Ele Slider and Ele Post widgets to your Elementor layout for seamless integration.
 
 == Changelog ==
 
@@ -90,7 +101,8 @@ To add screenshots:
 
 == Upgrade Notice ==
 
-No upgrade notices for this version.
+= 1.0 =
+* Initial release. No upgrades available yet.
 
 == Support ==
 

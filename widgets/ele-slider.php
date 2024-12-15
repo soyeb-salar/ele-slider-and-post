@@ -17,11 +17,11 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_script_depends() {
-        return [ 'esp-script' ];
+        return [ 'ele-script' ];
     }
 
     public function get_style_depends() {
-        return [ 'esp-style-slider', 'esp-icon' ];
+        return [ 'ele-style-slider', 'esp-icon' ];
     }
 
     protected function _register_controls() {
@@ -293,6 +293,12 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
 
         $this->end_controls_section();
         // Box Shadow Section for Slider
+
+
+
+
+
+
 $this->start_controls_section(
     'slider_shadow_section',
     [
@@ -366,6 +372,167 @@ $this->add_control(
 
 $this->end_controls_section();
 
+
+
+
+//arrow controll section
+$this->start_controls_section(
+    'slider_arrow_section',
+    [
+        'label' => __( 'Arrow Settings', 'ele-slider-and-post' ),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_color',
+    [
+        'label' => __( 'Arrow Color', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#000000',
+        'selectors' => [
+            '{{WRAPPER}} .arrows' => 'color: {{VALUE}};'
+        ],
+    ]
+);
+$this->add_control(
+    'slider_arrow_color_bg',
+    [
+        'label' => __( 'Arrow Color Background', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#FFFFFF',
+        'selectors' => [
+            '{{WRAPPER}} .button .arrowbg' => 'background-color: {{VALUE}};'
+        ],
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_color_bg_hover',
+    [
+        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#505050',
+        'selectors' => [
+            '{{WRAPPER}} .arrowbg:hover' => 'background-color: {{VALUE}};'
+        ],
+    ]
+);
+$this->add_group_control(
+    \Elementor\Group_Control_Border::get_type(),
+    [
+        'name' => 'Arrowborder',
+        'selector' => '{{WRAPPER}} .arrowbg',
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_redius',
+    [
+        'label' => __( 'Arrow Redius', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 8,
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_width',
+    [
+        'label' => __( 'Arrow Width', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 35,
+    ]
+);
+$this->add_control(
+    'slider_arrow_height',
+    [
+        'label' => __( 'Arrow Height', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 35,
+    ]
+);
+$this->end_controls_section();
+
+
+//arrow controll section
+$this->start_controls_section(
+    'slider_arrow_section',
+    [
+        'label' => __( 'Arrow Settings', 'ele-slider-and-post' ),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_color',
+    [
+        'label' => __( 'Arrow Color', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#000000',
+        'selectors' => [
+            '{{WRAPPER}} .arrows' => 'color: {{VALUE}};'
+        ],
+    ]
+);
+$this->add_control(
+    'slider_arrow_color_bg',
+    [
+        'label' => __( 'Arrow Color Background', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#FFFFFF',
+        'selectors' => [
+            '{{WRAPPER}} .button .arrowbg' => 'background-color: {{VALUE}};'
+        ],
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_color_bg_hover',
+    [
+        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#505050',
+        'selectors' => [
+            '{{WRAPPER}} .arrowbg:hover' => 'background-color: {{VALUE}};'
+        ],
+    ]
+);
+$this->add_group_control(
+    \Elementor\Group_Control_Border::get_type(),
+    [
+        'name' => 'Arrowborder',
+        'selector' => '{{WRAPPER}} .arrowbg',
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_redius',
+    [
+        'label' => __( 'Arrow Redius', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 8,
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_width',
+    [
+        'label' => __( 'Arrow Width', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 35,
+    ]
+);
+$this->add_control(
+    'slider_arrow_height',
+    [
+        'label' => __( 'Arrow Height', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 35,
+    ]
+);
+$this->end_controls_section();
+
+
     }
 
     protected function get_available_image_sizes() {
@@ -400,6 +567,12 @@ $this->end_controls_section();
                  $settings['slider_shadow_spread'],
                  $slider_shadow_rgba
              );  
+
+             $arrow_width = $settings['slider_arrow_width'];
+             $arrow_height = $settings['slider_arrow_height'];
+             $arrow_redius = $settings['slider_arrow_redius'];
+             $arrow_style= "width: {$arrow_width}px;height: {$arrow_height}px;border-radius: {$arrow_redius}px;";
+
     
         if ( ! empty( $slides ) ) : ?>
             <div class="ele-container">
@@ -435,8 +608,8 @@ $this->end_controls_section();
                     <?php endforeach; ?>
                 </div>
                 <div class="button">
-                    <button class="prev"><i class="icon icon-left-arrows"></i></button>
-                    <button class="next"><i class="icon icon-right-arrow1"></i></button>
+                    <button class="prev arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><i class="icon icon-left-arrows arrows"></i></button>
+                    <button class="next arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><i class="icon icon-right-arrow1 arrows"></i></button>
                 </div>
             </div>
         <?php endif;

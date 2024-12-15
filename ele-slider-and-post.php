@@ -20,9 +20,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
+define('ELE_SLIDER_AND_POST_VERSION', '1.0' );
+define('ELE_SLIDER_AND_POST_URL', plugin_dir_url( __FILE__ ) );
+define('ELE_SLIDER_AND_POST_PATH', plugin_dir_path( __FILE__ ) );
+define('ELE_SLIDER_AND_POST_BASENAME', plugin_basename( __FILE__ ) );
 // Load text domain for translations
 function ele_slider_and_post_load_textdomain() {
-    load_plugin_textdomain( 'ele-slider-and-post', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+    load_plugin_textdomain( 'ele-slider-and-post', false, dirname( ELE_SLIDER_AND_POST_BASENAME ) . '/languages' );
 }
 add_action( 'plugins_loaded', 'ele_slider_and_post_load_textdomain' );
 // Add Custom Category
@@ -48,22 +52,12 @@ function ele_register_widgets( $widgets_manager ) {
 add_action( 'elementor/widgets/register', 'ele_register_widgets' );
 
 // Enqueue Scripts and Styles
+// Enqueue Scripts and Styles
 function ele_enqueue_assets() {
-// Use file modification time as version
-$script_version = filemtime( plugin_dir_path( __FILE__ ) . 'assets/ele-script.js' );
-wp_register_script( 'ele-script', plugins_url( '/assets/ele-script.js', __FILE__ ), array( 'jquery' ), $script_version, true );
-wp_register_style( 
-    'ele-style-slider', 
-    plugins_url( '/assets/ele-style-slider.css', __FILE__ ), 
-    [], 
-    filemtime( plugin_dir_path( __FILE__ ) . 'assets/ele-style-slider.css' )
-);
-
-wp_register_style( 
-    'ele-style-post', 
-    plugins_url( '/assets/ele-style-post.css', __FILE__ ), 
-    [], 
-    filemtime( plugin_dir_path( __FILE__ ) . 'assets/ele-style-post.css' )
-);
+    wp_register_script( 'ele-script', ELE_SLIDER_AND_POST_URL.'/assets/ele-script.js', array( 'jquery' ), ELE_SLIDER_AND_POST_VERSION, true );
+    wp_register_style( 'ele-style-slider', ELE_SLIDER_AND_POST_URL. '/assets/ele-style-slider.css', array(), ELE_SLIDER_AND_POST_VERSION, 'all' );
+    wp_register_style( 'ele-style-post', ELE_SLIDER_AND_POST_URL.'/assets/ele-style-post.css', array(), ELE_SLIDER_AND_POST_VERSION, 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'ele_enqueue_assets' );
+add_action( 'admin_enqueue_scripts', 'ele_enqueue_assets' );
+

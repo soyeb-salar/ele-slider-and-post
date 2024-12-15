@@ -17,11 +17,11 @@ class Ele_Post_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_script_depends() {
-        return [ 'esp-script' ];
+        return [ 'ele-script' ];
     }
 
     public function get_style_depends() {
-        return [ 'esp-style-post', 'esp-icon' ];
+        return [ 'ele-style-post', 'esp-icon' ];
     }
 
     protected function _register_controls() {
@@ -214,6 +214,85 @@ class Ele_Post_Widget extends \Elementor\Widget_Base {
         );
 
         $this->end_controls_section();
+        //load default controls for slider arrow settings
+
+//arrow controll section
+$this->start_controls_section(
+    'slider_arrow_section',
+    [
+        'label' => __( 'Arrow Settings', 'ele-slider-and-post' ),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_color',
+    [
+        'label' => __( 'Arrow Color', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#000000',
+        'selectors' => [
+            '{{WRAPPER}} .arrows' => 'color: {{VALUE}};'
+        ],
+    ]
+);
+$this->add_control(
+    'slider_arrow_color_bg',
+    [
+        'label' => __( 'Arrow Color Background', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#FFFFFF',
+        'selectors' => [
+            '{{WRAPPER}} .button .arrowbg' => 'background-color: {{VALUE}};'
+        ],
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_color_bg_hover',
+    [
+        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'default' => '#505050',
+        'selectors' => [
+            '{{WRAPPER}} .arrowbg:hover' => 'background-color: {{VALUE}};'
+        ],
+    ]
+);
+$this->add_group_control(
+    \Elementor\Group_Control_Border::get_type(),
+    [
+        'name' => 'Arrowborder',
+        'selector' => '{{WRAPPER}} .arrowbg',
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_redius',
+    [
+        'label' => __( 'Arrow Redius', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 8,
+    ]
+);
+
+$this->add_control(
+    'slider_arrow_width',
+    [
+        'label' => __( 'Arrow Width', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 35,
+    ]
+);
+$this->add_control(
+    'slider_arrow_height',
+    [
+        'label' => __( 'Arrow Height', 'ele-slider-and-post' ),
+        'type' => \Elementor\Controls_Manager::NUMBER,
+        'default' => 35,
+    ]
+);
+$this->end_controls_section();
     }
 
     protected function render() {
@@ -236,6 +315,10 @@ class Ele_Post_Widget extends \Elementor\Widget_Base {
             'post_type' => $settings['post_type'],
             'posts_per_page' => $settings['posts_per_page'],
         );
+        $arrow_width = $settings['slider_arrow_width'];
+        $arrow_height = $settings['slider_arrow_height'];
+        $arrow_redius = $settings['slider_arrow_redius'];
+        $arrow_style= "width: {$arrow_width}px;height: {$arrow_height}px;border-radius: {$arrow_redius}px;";
 
         $query = new WP_Query($args);
         ?>
@@ -255,8 +338,8 @@ class Ele_Post_Widget extends \Elementor\Widget_Base {
                 <?php endif; ?>
             </div>
             <div class="button">
-                <button class="prevpost"><i class="icon icon-left-arrows"></i></button>
-                <button class="nextpost"><i class="icon icon-right-arrow1"></i></button>
+                <button class="prevpost arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><i class="icon icon-left-arrows arrows"></i></button>
+                <button class="nextpost arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><i class="icon icon-right-arrow1 arrows"></i></button>
             </div>
         </div>
         <?php
