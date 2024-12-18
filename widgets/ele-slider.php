@@ -5,7 +5,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_title() {
-        return __( 'Ele Slider', 'ele-slider-and-post' );
+        return __( 'Ele Slider', 'ele-slider-and-post-addon' );
     }
 
     public function get_icon() {
@@ -29,7 +29,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __( 'Slides', 'ele-slider-and-post' ),
+                'label' => __( 'Slides', 'ele-slider-and-post-addon' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -40,7 +40,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $repeater->add_control(
             'background_image',
             [
-                'label' => __( 'Background Image', 'ele-slider-and-post' ),
+                'label' => __( 'Background Image', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -52,9 +52,9 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $repeater->add_control(
             'slider_title',
             [
-                'label' => __( 'Title', 'ele-slider-and-post' ),
+                'label' => __( 'Title', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'Sample Title', 'ele-slider-and-post' ),
+                'default' => __( 'Sample Title', 'ele-slider-and-post-addon' ),
                 'label_block' => true,
             ]
         );
@@ -63,9 +63,9 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $repeater->add_control(
             'slider_description',
             [
-                'label' => __( 'Description', 'ele-slider-and-post' ),
+                'label' => __( 'Description', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'default' => __( 'Sample Description', 'ele-slider-and-post' ),
+                'default' => __( 'Sample Description', 'ele-slider-and-post-addon' ),
                 'label_block' => true,
             ]
         );
@@ -74,9 +74,9 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $repeater->add_control(
             'button_text',
             [
-                'label' => __( 'Button Text', 'ele-slider-and-post' ),
+                'label' => __( 'Button Text', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __( 'Read More', 'ele-slider-and-post' ),
+                'default' => __( 'Read More', 'ele-slider-and-post-addon' ),
                 'label_block' => true,
             ]
         );
@@ -85,9 +85,9 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $repeater->add_control(
             'button_link',
             [
-                'label' => __( 'Button Link', 'ele-slider-and-post' ),
+                'label' => __( 'Button Link', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::URL,
-                'placeholder' => __( 'https://your-link.com', 'ele-slider-and-post' ),
+                'placeholder' => __( 'https://your-link.com', 'ele-slider-and-post-addon' ),
                 'show_external' => true,
                 'default' => [
                     'url' => '',
@@ -101,14 +101,14 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'slides',
             [
-                'label' => __( 'Slides', 'ele-slider-and-post' ),
+                'label' => __( 'Slides', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
                     [
-                        'slider_title' => __( 'Sample Title', 'ele-slider-and-post' ),
-                        'slider_description' => __( 'Sample Description', 'ele-slider-and-post' ),
-                        'button_text' => __( 'Read More', 'ele-slider-and-post' ),
+                        'slider_title' => __( 'Sample Title', 'ele-slider-and-post-addon' ),
+                        'slider_description' => __( 'Sample Description', 'ele-slider-and-post-addon' ),
+                        'button_text' => __( 'Read More', 'ele-slider-and-post-addon' ),
                     ],
                 ],
                 'title_field' => '{{{ slider_title }}}',
@@ -120,7 +120,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'global_style_section',
             [
-                'label' => __( 'Global Styles', 'ele-slider-and-post' ),
+                'label' => __( 'Global Styles', 'ele-slider-and-post-addon' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -129,7 +129,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'slider_width',
             [
-                'label' => __( 'Slider Width', 'ele-slider-and-post' ),
+                'label' => __( 'Slider Width', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'vw' ],
                 'range' => [
@@ -157,7 +157,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'slider_height',
             [
-                'label' => __( 'Slider Height', 'ele-slider-and-post' ),
+                'label' => __( 'Slider Height', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'vh' ],
                 'range' => [
@@ -184,7 +184,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'global_image_size',
             [
-                'label' => __( 'Image Size', 'ele-slider-and-post' ),
+                'label' => __( 'Image Size', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => $this->get_available_image_sizes(),
                 'default' => 'full',
@@ -197,7 +197,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'global_style_section',
             [
-                'label' => __( 'Global Styles', 'ele-slider-and-post' ),
+                'label' => __( 'Global Styles', 'ele-slider-and-post-addon' ),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -207,8 +207,8 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'label' => __( 'Title Typography', 'ele-slider-and-post' ),
-                'selector' => '{{WRAPPER}} .name',
+                'label' => __( 'Title Typography', 'ele-slider-and-post-addon' ),
+                'selector' => '{{WRAPPER}} .ele-name',
             ]
         );
 
@@ -216,10 +216,10 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'title_color',
             [
-                'label' => __( 'Title Color', 'ele-slider-and-post' ),
+                'label' => __( 'Title Color', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .name' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ele-name' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -229,8 +229,8 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'description_typography',
-                'label' => __( 'Description Typography', 'ele-slider-and-post' ),
-                'selector' => '{{WRAPPER}} .des',
+                'label' => __( 'Description Typography', 'ele-slider-and-post-addon' ),
+                'selector' => '{{WRAPPER}} .ele-des',
             ]
         );
 
@@ -238,10 +238,10 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'description_color',
             [
-                'label' => __( 'Description Color', 'ele-slider-and-post' ),
+                'label' => __( 'Description Color', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .des' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .ele-des' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -251,7 +251,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'button_typography',
-                'label' => __( 'Button Typography', 'ele-slider-and-post' ),
+                'label' => __( 'Button Typography', 'ele-slider-and-post-addon' ),
                 'selector' => '{{WRAPPER}} .btnTitle',
             ]
         );
@@ -260,7 +260,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'button_text_color',
             [
-                'label' => __( 'Button Text Color', 'ele-slider-and-post' ),
+                'label' => __( 'Button Text Color', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .btnTitle' => 'color: {{VALUE}};',
@@ -272,7 +272,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'button_background_color',
             [
-                'label' => __( 'Button Background Color', 'ele-slider-and-post' ),
+                'label' => __( 'Button Background Color', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .btnTitle' => 'background-color: {{VALUE}};',
@@ -284,7 +284,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'global_image_size',
             [
-                'label' => __( 'Image Size', 'ele-slider-and-post' ),
+                'label' => __( 'Image Size', 'ele-slider-and-post-addon' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => $this->get_available_image_sizes(),
                 'default' => 'full',
@@ -302,7 +302,7 @@ class Ele_Slider_Widget extends \Elementor\Widget_Base {
 $this->start_controls_section(
     'slider_shadow_section',
     [
-        'label' => __( 'Box Shadow', 'ele-slider-and-post' ),
+        'label' => __( 'Box Shadow', 'ele-slider-and-post-addon' ),
         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
     ]
 );
@@ -310,7 +310,7 @@ $this->start_controls_section(
 $this->add_control(
     'slider_shadow_color',
     [
-        'label' => __( 'Shadow Color', 'ele-slider-and-post' ),
+        'label' => __( 'Shadow Color', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#505050',
     ]
@@ -319,7 +319,7 @@ $this->add_control(
 $this->add_control(
     'slider_shadow_opacity',
     [
-        'label' => __( 'Shadow Opacity', 'ele-slider-and-post' ),
+        'label' => __( 'Shadow Opacity', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::SLIDER,
         'default' => [
             'size' => 0.5,
@@ -337,7 +337,7 @@ $this->add_control(
 $this->add_control(
     'slider_shadow_horizontal',
     [
-        'label' => __( 'Horizontal Offset', 'ele-slider-and-post' ),
+        'label' => __( 'Horizontal Offset', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 0,
     ]
@@ -346,7 +346,7 @@ $this->add_control(
 $this->add_control(
     'slider_shadow_vertical',
     [
-        'label' => __( 'Vertical Offset', 'ele-slider-and-post' ),
+        'label' => __( 'Vertical Offset', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 30,
     ]
@@ -355,7 +355,7 @@ $this->add_control(
 $this->add_control(
     'slider_shadow_blur',
     [
-        'label' => __( 'Blur Radius', 'ele-slider-and-post' ),
+        'label' => __( 'Blur Radius', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 50,
     ]
@@ -364,7 +364,7 @@ $this->add_control(
 $this->add_control(
     'slider_shadow_spread',
     [
-        'label' => __( 'Spread Radius', 'ele-slider-and-post' ),
+        'label' => __( 'Spread Radius', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 0,
     ]
@@ -379,7 +379,7 @@ $this->end_controls_section();
 $this->start_controls_section(
     'slider_arrow_section',
     [
-        'label' => __( 'Arrow Settings', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Settings', 'ele-slider-and-post-addon' ),
         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
     ]
 );
@@ -387,7 +387,7 @@ $this->start_controls_section(
 $this->add_control(
     'slider_arrow_color',
     [
-        'label' => __( 'Arrow Color', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Color', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#000000',
         'selectors' => [
@@ -398,7 +398,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_color_bg',
     [
-        'label' => __( 'Arrow Color Background', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Color Background', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#FFFFFF',
         'selectors' => [
@@ -410,7 +410,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_color_bg_hover',
     [
-        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#505050',
         'selectors' => [
@@ -429,7 +429,7 @@ $this->add_group_control(
 $this->add_control(
     'slider_arrow_redius',
     [
-        'label' => __( 'Arrow Redius', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Redius', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 8,
     ]
@@ -438,7 +438,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_width',
     [
-        'label' => __( 'Arrow Width', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Width', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 35,
     ]
@@ -446,7 +446,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_height',
     [
-        'label' => __( 'Arrow Height', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Height', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 35,
     ]
@@ -458,7 +458,7 @@ $this->end_controls_section();
 $this->start_controls_section(
     'slider_arrow_section',
     [
-        'label' => __( 'Arrow Settings', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Settings', 'ele-slider-and-post-addon' ),
         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
     ]
 );
@@ -466,7 +466,7 @@ $this->start_controls_section(
 $this->add_control(
     'slider_arrow_color',
     [
-        'label' => __( 'Arrow Color', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Color', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#000000',
         'selectors' => [
@@ -477,7 +477,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_color_bg',
     [
-        'label' => __( 'Arrow Color Background', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Color Background', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#FFFFFF',
         'selectors' => [
@@ -489,7 +489,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_color_bg_hover',
     [
-        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Color Background Hover', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::COLOR,
         'default' => '#505050',
         'selectors' => [
@@ -508,7 +508,7 @@ $this->add_group_control(
 $this->add_control(
     'slider_arrow_redius',
     [
-        'label' => __( 'Arrow Redius', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Redius', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 8,
     ]
@@ -517,7 +517,7 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_width',
     [
-        'label' => __( 'Arrow Width', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Width', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 35,
     ]
@@ -525,11 +525,36 @@ $this->add_control(
 $this->add_control(
     'slider_arrow_height',
     [
-        'label' => __( 'Arrow Height', 'ele-slider-and-post' ),
+        'label' => __( 'Arrow Height', 'ele-slider-and-post-addon' ),
         'type' => \Elementor\Controls_Manager::NUMBER,
         'default' => 35,
     ]
 );
+//left arrow selector
+$this->add_control(
+    'icon_left',
+    [
+        'label' => esc_html__( 'Icon Left', 'ele-slider-and-post-addon' ),
+        'type' => \Elementor\Controls_Manager::ICONS,
+        'default' => [
+            'value' => 'fas fa-arrow-left',
+            'library' => 'fa-solid',
+        ],
+    ]
+);
+//right arrow collector
+$this->add_control(
+    'icon_right',
+    [
+        'label' => esc_html__( 'Icon Right', 'ele-slider-and-post-addon' ),
+        'type' => \Elementor\Controls_Manager::ICONS,
+        'default' => [
+            'value' => 'fas fa-arrow-right',
+            'library' => 'fa-solid',
+        ],
+    ]
+);
+
 $this->end_controls_section();
 
 
@@ -572,7 +597,9 @@ $this->end_controls_section();
              $arrow_height = $settings['slider_arrow_height'];
              $arrow_redius = $settings['slider_arrow_redius'];
              $arrow_style= "width: {$arrow_width}px;height: {$arrow_height}px;border-radius: {$arrow_redius}px;";
-
+            // Retrieve the selected icons
+            $icon_left = $settings['icon_left'];
+            $icon_right = $settings['icon_right'];
     
         if ( ! empty( $slides ) ) : ?>
             <div class="ele-container">
@@ -583,6 +610,7 @@ $this->end_controls_section();
                         $description = $slide['slider_description'];
                         $button_text = $slide['button_text'];
                         $button_link = $slide['button_link']['url'];
+                      
                     ?>
                     <div class="ele-item" style="background-image: url(<?php echo esc_url( $background_image ); ?>); box-shadow: <?php echo esc_attr($box_slider_shadow); ?>;">
                         <div class="ele-content">
@@ -608,8 +636,13 @@ $this->end_controls_section();
                     <?php endforeach; ?>
                 </div>
                 <div class="button">
-                    <button class="prev arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><i class="icon icon-left-arrows arrows"></i></button>
-                    <button class="next arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><i class="icon icon-right-arrow1 arrows"></i></button>
+                    <button class="prev arrowbg" style="<?php echo esc_attr($arrow_style); ?>">
+                        <?php if ( ! empty( $icon_left['value'] ) ) {
+                        echo '<i class="arrows ' . esc_attr( $icon_left['value'] ) . '"></i>';
+                        }?></button>
+                    <button class="next arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><?php if ( ! empty( $icon_right['value'] ) ) {
+                      echo '<i class="arrows ' . esc_attr( $icon_right['value'] ) . '"></i>';
+                                       } ?></button>
                 </div>
             </div>
         <?php endif;

@@ -1,4 +1,4 @@
-=== Ele Slider and Post ===
+=== Ele Slider and Post addon ===
 Author: Soyeb Salar
 Contributors: soyebsalar
 Donate link: https://soyebsalar.in/donate/
