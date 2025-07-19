@@ -1,152 +1,219 @@
-/* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
+/* Modern Ele Slider Styles */
+.ele-slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
 
-/* body{
-    background: #eaeaea;
+.ele-slider-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
     overflow: hidden;
-} */
-
-.ele-container{
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    width: 1000px;
-    height: 600px;
-    /* background: #f5f5f5;
-    box-shadow: 0 30px 50px #dbdbdb; */
+    border-radius: 10px;
+    background: #000;
 }
 
-.ele-container .ele-slide .ele-item{
-    width: 200px;
-    height: 300px;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    border-radius: 20px;
-    box-shadow: 0 30px 50px #505050;
-    background-position: 50% 50%;
-    background-size: cover;
-    display: inline-block;
-    transition: 0.5s;
-}
-
-.ele-slide .ele-item:nth-child(1),
-.ele-slide .ele-item:nth-child(2){
-    top: 0;
-    left: 0;
-    transform: translate(0, 0);
-    border-radius: 0;
+.ele-slider-slides {
+    position: relative;
     width: 100%;
     height: 100%;
 }
 
-
-.ele-slide .ele-item:nth-child(3){
-    left: 50%;
-}
-.ele-slide .ele-item:nth-child(4){
-    left: calc(50% + 220px);
-}
-.ele-slide .ele-item:nth-child(5){
-    left: calc(50% + 440px);
-}
-
-/* here n = 0, 1, 2, 3,... */
-.ele-slide .ele-item:nth-child(n + 6){
-    left: calc(50% + 660px);
+.ele-slider-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.ele-slider-slide.active {
+    opacity: 1;
+}
 
+.ele-slider-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-.ele-item .ele-content{
+.ele-slider-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.ele-slider-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.ele-slider-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.ele-slider-description {
+    font-size: 1.1rem;
+    margin: 0 0 2rem 0;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.ele-slider-button {
+    display: inline-block;
+    background: #007cba;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.ele-slider-button:hover {
+    background: #005a87;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 124, 186, 0.3);
+}
+
+/* Navigation */
+.ele-slider-navigation {
     position: absolute;
     top: 50%;
-    left: 100px;
-    width: 300px;
-    text-align: left;
-    color: #eee;
-    transform: translate(0, -50%);
-    font-family: system-ui;
-    display: none;
-}
-
-    .ele-content button:hover {
-        color: #FFFFFF; /* White */
-        background-color: #FF8C00; /* Dark orange */
-    }
-
-
-
-
-.ele-slide .ele-item:nth-child(2) .ele-content{
-    display: block;
-}
-
-
-.ele-content .ele-name{
-    font-size: 40px;
-    text-transform: uppercase;
-    font-weight: bold;
-    opacity: 0;
-    animation: animate 1s ease-in-out 1 forwards;
-}
-
-.ele-content .ele-des{
-    margin-top: 10px;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: animate 1s ease-in-out 0.3s 1 forwards;
-}
-
-.ele-content button{
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    animation: animate 1s ease-in-out 0.6s 1 forwards;
-}
-
-
-@keyframes animate {
-    from{
-        opacity: 0;
-        transform: translate(0, 100px);
-        filter: blur(33px);
-    }
-
-    to{
-        opacity: 1;
-        transform: translate(0);
-        filter: blur(0);
-    }
-}
-
-
-
-.button{
+    transform: translateY(-50%);
+    z-index: 3;
     width: 100%;
-    text-align: center;
+    pointer-events: none;
+}
+
+.ele-slider-prev,
+.ele-slider-next {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #333;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.ele-slider-prev:hover,
+.ele-slider-next:hover {
+    background: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ele-slider-prev {
+    left: 20px;
+}
+
+.ele-slider-next {
+    right: 20px;
+}
+
+/* Pagination */
+.ele-slider-pagination {
     position: absolute;
     bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 3;
 }
 
-.button button{
-    width: 40px;
-    height: 35px;
-    border-radius: 8px;
+.ele-slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
     border: none;
     cursor: pointer;
-    margin: 0 5px;
-    border: 1px solid #000;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
-.button button:hover{
-    background: #ababab;
-    color: #fff;
+.ele-slider-dot:hover,
+.ele-slider-dot.active {
+    background: #fff;
+    transform: scale(1.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ele-slider-title {
+        font-size: 2rem;
+    }
+    
+    .ele-slider-description {
+        font-size: 1rem;
+    }
+    
+    .ele-slider-content {
+        padding: 15px;
+        max-width: 90%;
+    }
+    
+    .ele-slider-prev,
+    .ele-slider-next {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .ele-slider-prev {
+        left: 15px;
+    }
+    
+    .ele-slider-next {
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ele-slider-title {
+        font-size: 1.5rem;
+    }
+    
+    .ele-slider-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .ele-slider-button {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
 }
