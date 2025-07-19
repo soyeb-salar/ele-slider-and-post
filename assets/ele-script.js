@@ -1,30 +1,5 @@
 jQuery(document).ready(function($) {
-    // let next = document.querySelector('.next')
-    // let prev = document.querySelector('.prev')
-    
-    // next.addEventListener('click', function(){
-    //     let items = document.querySelectorAll('.ele-item')
-    //     document.querySelector('.ele-slide').appendChild(items[0])
-    // })
-    
-    // prev.addEventListener('click', function(){
-    //     let items = document.querySelectorAll('.ele-item')
-    //     document.querySelector('.ele-slide').prepend(items[items.length - 1]) // here the length of items = 6
-    // })  
-// for post silder
-// let nextpost = document.querySelector('.nextpost')
-// let prevpost = document.querySelector('.prevpost')
-    
-//     nextpost.addEventListener('click', function(){
-//         let items = document.querySelectorAll('.ele-item-post')
-//         document.querySelector('.ele-slide-post').appendChild(items[0])
-//     })
-    
-//     prevpost.addEventListener('click', function(){
-//         let items = document.querySelectorAll('.ele-item-post')
-//         document.querySelector('.ele-slide-post').prepend(items[items.length - 1]) // here the length of items = 6
-//     })  
-
+   
 // Function to initialize slider functionality for a specific slider container
 function initializeSlider(sliderContainer) {
     // Select the next and previous buttons within the specific slider container

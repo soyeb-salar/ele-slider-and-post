@@ -1,5 +1,5 @@
 <?php
-class Ele_Post_Widget extends \Elementor\Widget_Base {
+class EleSlider_Post_Widget extends \Elementor\Widget_Base {
     public function get_name() {
         return 'ele-post';
     }
@@ -353,7 +353,7 @@ $this->end_controls_section();
             <div class="ele-slide-post">
                 <?php if ($query->have_posts()) : ?>
                     <?php while ($query->have_posts()) : $query->the_post(); ?>
-                        <div class="ele-item-post" style="background-image: url(<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full') ?: 'https://i.ibb.co/qCkd9jS/img1.jpg'); ?>); box-shadow: <?php echo esc_attr($box_shadow); ?>;">
+                        <div class="ele-item-post" style="background-image: url(<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full') ?: ''.ELESLIDER_AND_POST_URL.'assets/images/img1.jpg'); ?>); box-shadow: <?php echo esc_attr($box_shadow); ?>;">
                             <div class="ele-content-post">
                                 <div class="ele-name-post"><?php the_title(); ?></div>
                                 <div class="ele-des-post"><?php echo esc_attr(wp_trim_words(get_the_excerpt(), 15)); ?></div>
@@ -365,11 +365,11 @@ $this->end_controls_section();
                 <?php endif; ?>
             </div>
             <div class="button">
-                < <button class="prev arrowbg" style="<?php echo esc_attr($arrow_style); ?>">
+                <button class="prevpost arrowbg" style="<?php echo esc_attr($arrow_style); ?>">
                         <?php if ( ! empty( $icon_left['value'] ) ) {
                         echo '<i class="arrows ' . esc_attr( $icon_left['value'] ) . '"></i>';
                         }?></button>
-                    <button class="next arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><?php if ( ! empty( $icon_right['value'] ) ) {
+                    <button class="nextpost arrowbg" style="<?php echo esc_attr($arrow_style); ?>"><?php if ( ! empty( $icon_right['value'] ) ) {
                       echo '<i class="arrows ' . esc_attr( $icon_right['value'] ) . '"></i>';
                                        } ?></button>
             </div>

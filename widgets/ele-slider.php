@@ -1,5 +1,5 @@
 <?php
-class Ele_Slider_Widget extends \Elementor\Widget_Base {
+class EleSlider_slider_Widget extends \Elementor\Widget_Base {
     public function get_name() {
         return 'ele-slider';
     }
