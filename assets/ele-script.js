@@ -1,52 +1,131 @@
-jQuery(document).ready(function($) {
-   
-// Function to initialize slider functionality for a specific slider container
-function initializeSlider(sliderContainer) {
-    // Select the next and previous buttons within the specific slider container
-    let next = sliderContainer.querySelector('.next');
-    let prev = sliderContainer.querySelector('.prev');
+/**
+ * Ele Slider JavaScript
+ * Modern slider functionality with autoplay, navigation, and pagination
+ */
 
-    // Event listener for the next button
-    next.addEventListener('click', function() {
-        let items = sliderContainer.querySelectorAll('.ele-item');
-        // Move the first item to the end of the slider container
-        sliderContainer.querySelector('.ele-slide').appendChild(items[0]);
+(function($) {
+    'use strict';
+
+    class EleSlider {
+        constructor(element) {
+            this.element = element;
+            this.wrapper = element.find('.ele-slider-wrapper');
+            this.slides = element.find('.ele-slider-slide');
+            this.prevBtn = element.find('.ele-slider-prev');
+            this.nextBtn = element.find('.ele-slider-next');
+            this.dots = element.find('.ele-slider-dot');
+            
+            this.currentSlide = 0;
+            this.totalSlides = this.slides.length;
+            this.autoplay = this.wrapper.data('autoplay') === 'true';
+            this.autoplaySpeed = parseInt(this.wrapper.data('speed')) || 3000;
+            this.autoplayInterval = null;
+            
+            if (this.totalSlides > 0) {
+                this.init();
+            }
+        }
+
+        init() {
+            this.setupEventListeners();
+            this.showSlide(0);
+            
+            if (this.autoplay) {
+                this.startAutoplay();
+            }
+        }
+
+        setupEventListeners() {
+            // Navigation buttons
+            this.prevBtn.on('click', () => this.prevSlide());
+            this.nextBtn.on('click', () => this.nextSlide());
+            
+            // Pagination dots
+            this.dots.on('click', (e) => {
+                const slideIndex = parseInt($(e.currentTarget).data('slide'));
+                this.goToSlide(slideIndex);
+            });
+            
+            // Pause autoplay on hover
+            if (this.autoplay) {
+                this.element.on('mouseenter', () => this.stopAutoplay());
+                this.element.on('mouseleave', () => this.startAutoplay());
+            }
+            
+            // Keyboard navigation
+            $(document).on('keydown', (e) => {
+                if (this.element.is(':hover')) {
+                    if (e.key === 'ArrowLeft') {
+                        this.prevSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        this.nextSlide();
+                    }
+                }
+            });
+        }
+
+        showSlide(index) {
+            // Remove active class from all slides and dots
+            this.slides.removeClass('active');
+            this.dots.removeClass('active');
+            
+            // Add active class to current slide and dot
+            this.slides.eq(index).addClass('active');
+            this.dots.eq(index).addClass('active');
+            
+            this.currentSlide = index;
+        }
+
+        nextSlide() {
+            const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+            this.goToSlide(nextIndex);
+        }
+
+        prevSlide() {
+            const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+            this.goToSlide(prevIndex);
+        }
+
+        goToSlide(index) {
+            if (index !== this.currentSlide) {
+                this.showSlide(index);
+                
+                // Reset autoplay timer
+                if (this.autoplay) {
+                    this.stopAutoplay();
+                    this.startAutoplay();
+                }
+            }
+        }
+
+        startAutoplay() {
+            if (this.autoplay && this.totalSlides > 1) {
+                this.autoplayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoplaySpeed);
+            }
+        }
+
+        stopAutoplay() {
+            if (this.autoplayInterval) {
+                clearInterval(this.autoplayInterval);
+                this.autoplayInterval = null;
+            }
+        }
+    }
+
+    // Initialize sliders when DOM is ready
+    $(document).ready(function() {
+        $('.ele-slider-wrapper').each(function() {
+            new EleSlider($(this));
+        });
     });
 
-    // Event listener for the previous button
-    prev.addEventListener('click', function() {
-        let items = sliderContainer.querySelectorAll('.ele-item');
-        // Move the last item to the beginning of the slider container
-        sliderContainer.querySelector('.ele-slide').prepend(items[items.length - 1]);
-    });
-}
-
-// Initialize each slider individually
-document.querySelectorAll('.ele-container').forEach(slider => initializeSlider(slider));
-
-
-
-// Function to initialize slider functionality for a specific slider container
-function initializePostSlider(sliderContainer) {
-    // Select the next and previous buttons within the specific slider container
-    let nextpost = sliderContainer.querySelector('.nextpost');
-    let prevpost = sliderContainer.querySelector('.prevpost');
-
-    // Event listener for the next button
-    nextpost.addEventListener('click', function() {
-        let items = sliderContainer.querySelectorAll('.ele-item-post');
-        // Move the first item to the end of the slider container
-        sliderContainer.querySelector('.ele-slide-post').appendChild(items[0]);
+    // Reinitialize sliders for Elementor editor
+    $(window).on('elementor/frontend/init', function() {
+        elementorFrontend.hooks.addAction('frontend/element_ready/ele-slider.default', function($scope) {
+            new EleSlider($scope.find('.ele-slider-wrapper'));
+        });
     });
 
-    // Event listener for the previous button
-    prevpost.addEventListener('click', function() {
-        let items = sliderContainer.querySelectorAll('.ele-item-post');
-        // Move the last item to the beginning of the slider container
-        sliderContainer.querySelector('.ele-slide-post').prepend(items[items.length - 1]);
-    });
-}
-
-// Initialize the sliders
-document.querySelectorAll('.ele-container-post').forEach(slider => initializePostSlider(slider));
-});
+})(jQuery);

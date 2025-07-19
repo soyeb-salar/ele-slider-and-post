@@ -1,152 +1,191 @@
-/* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
+/* Modern Ele Post Styles */
+.ele-posts-grid {
+    display: grid;
+    gap: 20px;
+    width: 100%;
+}
 
-/* body{
-    background: #eaeaea;
+/* Column layouts */
+.ele-posts-columns-1 {
+    grid-template-columns: 1fr;
+}
+
+.ele-posts-columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ele-posts-columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.ele-posts-columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Post item styles */
+.ele-post-item {
+    background: #fff;
+    border-radius: 8px;
     overflow: hidden;
-} */
-
-.ele-container-post{
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    width: 1000px;
-    height: 600px;
-    /* background: #f5f5f5;
-    box-shadow: 0 30px 50px #dbdbdb; */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-.ele-container-post .ele-slide-post .ele-item-post{
-    width: 200px;
-    height: 300px;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    border-radius: 20px;
-    box-shadow: 0 30px 50px #505050;
-    background-position: 50% 50%;
-    background-size: cover;
-    display: inline-block;
-    transition: 0.5s;
+.ele-post-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.ele-slide-post .ele-item-post:nth-child(1),
-.ele-slide-post .ele-item-post:nth-child(2){
-    top: 0;
-    left: 0;
-    transform: translate(0, 0);
-    border-radius: 0;
+/* Post thumbnail */
+.ele-post-thumbnail {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.ele-post-thumbnail a {
+    display: block;
     width: 100%;
     height: 100%;
 }
 
-
-.ele-slide-post .ele-item-post:nth-child(3){
-    left: 50%;
-}
-.ele-slide-post .ele-item-post:nth-child(4){
-    left: calc(50% + 220px);
-}
-.ele-slide-post .ele-item-post:nth-child(5){
-    left: calc(50% + 440px);
-}
-
-/* here n = 0, 1, 2, 3,... */
-.ele-slide-post .ele-item-post:nth-child(n + 6){
-    left: calc(50% + 660px);
-    opacity: 0;
-}
-
-
-
-.ele-item-post .ele-content-post{
-    position: absolute;
-    top: 50%;
-    left: 100px;
-    width: 300px;
-    text-align: left;
-    color: #eee;
-    transform: translate(0, -50%);
-    font-family: system-ui;
-    display: none;
-}
-
-    .ele-content-post button:hover {
-        color: #FFFFFF; /* White */
-        background-color: #FF8C00; /* Dark orange */
-    }
-
-
-
-
-.ele-slide-post .ele-item-post:nth-child(2) .ele-content-post{
-    display: block;
-}
-
-
-.ele-content-post .ele-name-post{
-    font-size: 40px;
-    text-transform: uppercase;
-    font-weight: bold;
-    opacity: 0;
-    animation: animate 1s ease-in-out 1 forwards;
-}
-
-.ele-content-post .ele-des-post{
-    margin-top: 10px;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: animate 1s ease-in-out 0.3s 1 forwards;
-}
-
-.ele-content-post button{
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0;
-    animation: animate 1s ease-in-out 0.6s 1 forwards;
-}
-
-
-@keyframes animate {
-    from{
-        opacity: 0;
-        transform: translate(0, 100px);
-        filter: blur(33px);
-    }
-
-    to{
-        opacity: 1;
-        transform: translate(0);
-        filter: blur(0);
-    }
-}
-
-
-
-.button{
+.ele-post-image {
     width: 100%;
-    text-align: center;
-    position: absolute;
-    bottom: 20px;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.button button{
-    width: 40px;
-    height: 35px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
+.ele-post-thumbnail:hover .ele-post-image {
+    transform: scale(1.05);
+}
+
+/* Post content */
+.ele-post-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ele-post-title {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.ele-post-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ele-post-title a:hover {
+    color: #007cba;
+}
+
+/* Post meta */
+.ele-post-meta {
+    margin: 0 0 15px 0;
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ele-post-date,
+.ele-post-author {
+    color: #666;
+}
+
+.ele-meta-separator {
     margin: 0 5px;
-    border: 1px solid #000;
-    transition: 0.3s;
+    color: #ccc;
 }
 
-.button button:hover{
-    background: #ababab;
+/* Post excerpt */
+.ele-post-excerpt {
+    margin: 0 0 20px 0;
+    color: #666;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+/* Read more button */
+.ele-post-read-more-wrapper {
+    margin-top: auto;
+}
+
+.ele-post-read-more {
+    display: inline-block;
+    color: #007cba;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.ele-post-read-more:hover {
+    background: #007cba;
     color: #fff;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ele-posts-columns-4 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .ele-posts-columns-3,
+    .ele-posts-columns-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .ele-post-content {
+        padding: 15px;
+    }
+    
+    .ele-post-title {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ele-posts-columns-2,
+    .ele-posts-columns-3,
+    .ele-posts-columns-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .ele-posts-grid {
+        gap: 15px;
+    }
+    
+    .ele-post-content {
+        padding: 12px;
+    }
+    
+    .ele-post-title {
+        font-size: 1rem;
+    }
+    
+    .ele-post-meta {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .ele-post-excerpt {
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
 }
