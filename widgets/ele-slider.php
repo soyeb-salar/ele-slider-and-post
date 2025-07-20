@@ -48,7 +48,7 @@ class EleSlider_Slider_Widget extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'ele-kit' );
+		return array( 'ele-addons' );
 	}
 
 	/**
@@ -66,7 +66,7 @@ class EleSlider_Slider_Widget extends \Elementor\Widget_Base {
 	 * @return array Script dependencies.
 	 */
 	public function get_script_depends() {
-		return array( 'ele-script' );
+		return array( 'ele-slider-script' );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class EleSlider_Slider_Widget extends \Elementor\Widget_Base {
 	 * @return array Style dependencies.
 	 */
 	public function get_style_depends() {
-		return array( 'ele-style-slider' );
+		return array( 'ele-slider-style' );
 	}
 
 	/**

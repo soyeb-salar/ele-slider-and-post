@@ -48,7 +48,7 @@ class EleSlider_Slider3_Widget extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'ele-kit' );
+		return array( 'ele-addons' );
 	}
 
 	/**
