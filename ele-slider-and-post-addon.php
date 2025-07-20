@@ -3,7 +3,7 @@
  * Plugin Name: Ele Slider and Post Addon
  * Description: Adds Elementor widgets: Ele Slider and Ele Post for creating beautiful and dynamic sliders and post displays within Elementor layouts.
  * Text Domain: ele-slider-and-post-addon
- * Version: 2.0.2
+ * Version: 2.0.3
  * Author: Soyeb Salar
  * Author URI: https://www.soyebsalar.in
  * License: GPLv2 or later
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'ELESLIDER_AND_POST_VERSION', '2.0.2' );
+define( 'ELESLIDER_AND_POST_VERSION', '2.0.3' );
 define( 'ELESLIDER_AND_POST_URL', plugin_dir_url( __FILE__ ) );
 define( 'ELESLIDER_AND_POST_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ELESLIDER_AND_POST_BASENAME', plugin_basename( __FILE__ ) );
@@ -63,6 +63,7 @@ final class EleSlider_And_Post_Addon {
 		
 		// Safe cache clearing on activation without affecting Elementor
 		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'on_deactivation' ) );
 	}
 
 	/**
@@ -76,6 +77,19 @@ final class EleSlider_And_Post_Addon {
 		
 		// Set activation notice
 		set_transient( 'eleslider_activation_notice', true, 30 );
+	}
+
+	/**
+	 * Plugin deactivation callback.
+	 */
+	public function on_deactivation() {
+		// Clean up our transients
+		delete_transient( 'eleslider_activation_notice' );
+		
+		// Clear basic cache
+		if ( function_exists( 'wp_cache_flush' ) ) {
+			wp_cache_flush();
+		}
 	}
 
 	/**
@@ -100,21 +114,40 @@ final class EleSlider_And_Post_Addon {
 			return;
 		}
 
-		// Load plugin textdomain.
-		add_action( 'init', array( $this, 'load_textdomain' ) );
+		// Only proceed if we're not breaking anything
+		if ( $this->is_safe_to_load() ) {
+			// Load plugin textdomain.
+			add_action( 'init', array( $this, 'load_textdomain' ) );
 
-		// Register widgets.
-		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ), 10 );
+			// Register widgets with very low priority to avoid conflicts.
+			add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ), 999 );
 
-		// Register widget category.
-		add_action( 'elementor/elements/categories_registered', array( $this, 'add_custom_category' ) );
+			// Register widget category with low priority.
+			add_action( 'elementor/elements/categories_registered', array( $this, 'add_custom_category' ), 999 );
 
-		// Enqueue assets.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
-		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_editor_assets' ) );
+			// Enqueue assets only when needed.
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
+		}
 		
-		// Activation notice.
+		// Activation notice (always show).
 		add_action( 'admin_notices', array( $this, 'activation_notice' ) );
+	}
+
+	/**
+	 * Check if it's safe to load our widgets.
+	 */
+	private function is_safe_to_load() {
+		// Don't load if Elementor is not fully loaded
+		if ( ! class_exists( '\Elementor\Plugin' ) ) {
+			return false;
+		}
+
+		// Don't load if there are other widget registration issues
+		if ( ! did_action( 'elementor/init' ) ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -224,8 +257,15 @@ final class EleSlider_And_Post_Addon {
 	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
 	 */
 	public function register_widgets( $widgets_manager ) {
+		// Extra safety check
+		if ( ! $widgets_manager || ! method_exists( $widgets_manager, 'register' ) ) {
+			return;
+		}
+
 		// Include widget files safely.
-		$this->include_widget_files();
+		if ( ! $this->include_widget_files() ) {
+			return; // Failed to include files
+		}
 
 		// Register widgets only if classes exist and not already registered.
 		$widgets = array(
@@ -236,19 +276,49 @@ final class EleSlider_And_Post_Addon {
 		);
 
 		foreach ( $widgets as $widget_class ) {
-			if ( class_exists( $widget_class ) ) {
+			if ( class_exists( $widget_class ) && ! $this->is_widget_registered( $widget_class, $widgets_manager ) ) {
 				try {
-					$widgets_manager->register( new $widget_class() );
+					$widget_instance = new $widget_class();
+					if ( method_exists( $widget_instance, 'get_name' ) ) {
+						$widgets_manager->register( $widget_instance );
+					}
 				} catch ( Exception $e ) {
 					// Silently skip if widget can't be registered
 					error_log( 'Ele Slider Widget Registration Error: ' . $e->getMessage() );
+				} catch ( Error $e ) {
+					// Handle fatal errors gracefully
+					error_log( 'Ele Slider Widget Fatal Error: ' . $e->getMessage() );
 				}
 			}
 		}
 	}
 
 	/**
+	 * Check if widget is already registered.
+	 *
+	 * @param string $widget_class Widget class name.
+	 * @param \Elementor\Widgets_Manager $widgets_manager Widgets manager.
+	 * @return bool
+	 */
+	private function is_widget_registered( $widget_class, $widgets_manager ) {
+		if ( ! method_exists( $widgets_manager, 'get_widget_types' ) ) {
+			return false;
+		}
+
+		try {
+			$widget_types = $widgets_manager->get_widget_types();
+			$temp_widget = new $widget_class();
+			$widget_name = method_exists( $temp_widget, 'get_name' ) ? $temp_widget->get_name() : '';
+			return isset( $widget_types[ $widget_name ] );
+		} catch ( Exception $e ) {
+			return false;
+		}
+	}
+
+	/**
 	 * Include widget files.
+	 *
+	 * @return bool Success status.
 	 */
 	private function include_widget_files() {
 		$widget_files = array(
@@ -258,17 +328,29 @@ final class EleSlider_And_Post_Addon {
 			'ele-slider4.php',
 		);
 
+		$success = true;
+		$included_files = 0;
+
 		foreach ( $widget_files as $file ) {
 			$file_path = ELESLIDER_AND_POST_PATH . 'widgets/' . $file;
 			if ( file_exists( $file_path ) && is_readable( $file_path ) ) {
 				try {
 					require_once $file_path;
+					$included_files++;
 				} catch ( Exception $e ) {
 					// Log error but don't break execution
 					error_log( 'Ele Slider Widget File Include Error (' . $file . '): ' . $e->getMessage() );
+					$success = false;
+				} catch ( Error $e ) {
+					// Handle fatal errors in file inclusion
+					error_log( 'Ele Slider Widget File Fatal Error (' . $file . '): ' . $e->getMessage() );
+					$success = false;
 				}
 			}
 		}
+
+		// Return true only if at least one file was included successfully
+		return $success && $included_files > 0;
 	}
 
 	/**
