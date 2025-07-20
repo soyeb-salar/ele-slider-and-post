@@ -66,7 +66,7 @@ class EleSlider_Slider3_Widget extends \Elementor\Widget_Base {
 	 * @return array Script dependencies.
 	 */
 	public function get_script_depends() {
-		return array( 'ele-script-slider3' );
+		return array( 'ele-slider3-script' );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class EleSlider_Slider3_Widget extends \Elementor\Widget_Base {
 	 * @return array Style dependencies.
 	 */
 	public function get_style_depends() {
-		return array( 'ele-style-slider3' );
+		return array( 'ele-slider3-style' );
 	}
 
 	/**

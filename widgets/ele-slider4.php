@@ -66,7 +66,7 @@ class EleSlider_Slider4_Widget extends \Elementor\Widget_Base {
 	 * @return array Script dependencies.
 	 */
 	public function get_script_depends() {
-		return array( 'ele-script-slider4-swiper', 'ele-script-slider4' );
+		return array( 'swiper-js', 'ele-slider4-script', 'ionicons' );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class EleSlider_Slider4_Widget extends \Elementor\Widget_Base {
 	 * @return array Style dependencies.
 	 */
 	public function get_style_depends() {
-		return array( 'ele-style-slider4', 'ele-style-slider4-custom' );
+		return array( 'swiper-css', 'ele-slider4-style' );
 	}
 
 	/**

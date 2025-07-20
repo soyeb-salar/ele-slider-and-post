@@ -1,131 +1,129 @@
-/**
- * Ele Slider JavaScript
- * Modern slider functionality with autoplay, navigation, and pagination
- */
-
-(function($) {
-    'use strict';
-
-    class EleSlider {
-        constructor(element) {
-            this.element = element;
-            this.wrapper = element.find('.ele-slider-wrapper');
-            this.slides = element.find('.ele-slider-slide');
-            this.prevBtn = element.find('.ele-slider-prev');
-            this.nextBtn = element.find('.ele-slider-next');
-            this.dots = element.find('.ele-slider-dot');
+/* Original Ele Slider JavaScript */
+jQuery(document).ready(function($) {
+    
+    // Initialize all sliders
+    $('.ele-slider-wrapper').each(function() {
+        var slider = $(this);
+        var slides = slider.find('.ele-slider-slide');
+        var currentSlide = 0;
+        var autoplay = slider.data('autoplay') === 'true' || slider.data('autoplay') === true;
+        var speed = parseInt(slider.data('speed')) || 3000;
+        var autoplayTimer;
+        
+        // Show first slide
+        if (slides.length > 0) {
+            slides.first().addClass('active');
+        }
+        
+        // Update pagination
+        function updatePagination() {
+            slider.find('.ele-slider-dot').removeClass('active');
+            slider.find('.ele-slider-dot').eq(currentSlide).addClass('active');
+        }
+        
+        // Go to specific slide
+        function goToSlide(index) {
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
             
-            this.currentSlide = 0;
-            this.totalSlides = this.slides.length;
-            this.autoplay = this.wrapper.data('autoplay') === 'true';
-            this.autoplaySpeed = parseInt(this.wrapper.data('speed')) || 3000;
-            this.autoplayInterval = null;
-            
-            if (this.totalSlides > 0) {
-                this.init();
+            slides.removeClass('active');
+            slides.eq(index).addClass('active');
+            currentSlide = index;
+            updatePagination();
+        }
+        
+        // Next slide
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+        
+        // Start autoplay
+        function startAutoplay() {
+            if (autoplay && slides.length > 1) {
+                autoplayTimer = setInterval(nextSlide, speed);
             }
         }
-
-        init() {
-            this.setupEventListeners();
-            this.showSlide(0);
-            
-            if (this.autoplay) {
-                this.startAutoplay();
+        
+        // Stop autoplay
+        function stopAutoplay() {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
             }
         }
-
-        setupEventListeners() {
-            // Navigation buttons
-            this.prevBtn.on('click', () => this.prevSlide());
-            this.nextBtn.on('click', () => this.nextSlide());
-            
-            // Pagination dots
-            this.dots.on('click', (e) => {
-                const slideIndex = parseInt($(e.currentTarget).data('slide'));
-                this.goToSlide(slideIndex);
-            });
-            
-            // Pause autoplay on hover
-            if (this.autoplay) {
-                this.element.on('mouseenter', () => this.stopAutoplay());
-                this.element.on('mouseleave', () => this.startAutoplay());
+        
+        // Navigation arrows
+        slider.find('.ele-slider-prev').click(function() {
+            stopAutoplay();
+            prevSlide();
+            startAutoplay();
+        });
+        
+        slider.find('.ele-slider-next').click(function() {
+            stopAutoplay();
+            nextSlide();
+            startAutoplay();
+        });
+        
+        // Pagination dots
+        slider.find('.ele-slider-dot').click(function() {
+            var index = $(this).data('slide');
+            stopAutoplay();
+            goToSlide(index);
+            startAutoplay();
+        });
+        
+        // Pause on hover
+        slider.hover(
+            function() {
+                stopAutoplay();
+            },
+            function() {
+                startAutoplay();
             }
-            
-            // Keyboard navigation
-            $(document).on('keydown', (e) => {
-                if (this.element.is(':hover')) {
-                    if (e.key === 'ArrowLeft') {
-                        this.prevSlide();
-                    } else if (e.key === 'ArrowRight') {
-                        this.nextSlide();
+        );
+        
+        // Keyboard navigation
+        $(document).keydown(function(e) {
+            if (slider.is(':hover')) {
+                if (e.keyCode === 37) { // Left arrow
+                    stopAutoplay();
+                    prevSlide();
+                    startAutoplay();
+                } else if (e.keyCode === 39) { // Right arrow
+                    stopAutoplay();
+                    nextSlide();
+                    startAutoplay();
+                }
+            }
+        });
+        
+        // Start autoplay
+        startAutoplay();
+        
+        // Initial pagination update
+        updatePagination();
+    });
+    
+    // Elementor editor compatibility
+    if (typeof elementor !== 'undefined') {
+        elementor.hooks.addAction('panel/open_editor/widget/ele-slider', function(panel, model, view) {
+            // Reinitialize sliders when widget is edited
+            setTimeout(function() {
+                $('.ele-slider-wrapper').each(function() {
+                    // Simple reinitialization for editor
+                    var slider = $(this);
+                    var slides = slider.find('.ele-slider-slide');
+                    slides.removeClass('active');
+                    if (slides.length > 0) {
+                        slides.first().addClass('active');
                     }
-                }
-            });
-        }
-
-        showSlide(index) {
-            // Remove active class from all slides and dots
-            this.slides.removeClass('active');
-            this.dots.removeClass('active');
-            
-            // Add active class to current slide and dot
-            this.slides.eq(index).addClass('active');
-            this.dots.eq(index).addClass('active');
-            
-            this.currentSlide = index;
-        }
-
-        nextSlide() {
-            const nextIndex = (this.currentSlide + 1) % this.totalSlides;
-            this.goToSlide(nextIndex);
-        }
-
-        prevSlide() {
-            const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-            this.goToSlide(prevIndex);
-        }
-
-        goToSlide(index) {
-            if (index !== this.currentSlide) {
-                this.showSlide(index);
-                
-                // Reset autoplay timer
-                if (this.autoplay) {
-                    this.stopAutoplay();
-                    this.startAutoplay();
-                }
-            }
-        }
-
-        startAutoplay() {
-            if (this.autoplay && this.totalSlides > 1) {
-                this.autoplayInterval = setInterval(() => {
-                    this.nextSlide();
-                }, this.autoplaySpeed);
-            }
-        }
-
-        stopAutoplay() {
-            if (this.autoplayInterval) {
-                clearInterval(this.autoplayInterval);
-                this.autoplayInterval = null;
-            }
-        }
+                });
+            }, 100);
+        });
     }
-
-    // Initialize sliders when DOM is ready
-    $(document).ready(function() {
-        $('.ele-slider-wrapper').each(function() {
-            new EleSlider($(this));
-        });
-    });
-
-    // Reinitialize sliders for Elementor editor
-    $(window).on('elementor/frontend/init', function() {
-        elementorFrontend.hooks.addAction('frontend/element_ready/ele-slider.default', function($scope) {
-            new EleSlider($scope.find('.ele-slider-wrapper'));
-        });
-    });
-
-})(jQuery);
+});

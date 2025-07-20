@@ -3,7 +3,7 @@
  * Plugin Name: Ele Slider and Post Addon
  * Description: Adds Elementor widgets: Ele Slider and Ele Post for creating beautiful and dynamic sliders and post displays within Elementor layouts.
  * Text Domain: ele-slider-and-post-addon
- * Version: 2.1.0
+ * Version: 2.1.1
  * Author: Soyeb Salar
  * Author URI: https://www.soyebsalar.in
  * License: GPLv2 or later
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'ELESLIDER_VERSION', '2.1.0' );
+define( 'ELESLIDER_VERSION', '2.1.1' );
 define( 'ELESLIDER_URL', plugin_dir_url( __FILE__ ) );
 define( 'ELESLIDER_PATH', plugin_dir_path( __FILE__ ) );
 
@@ -102,21 +102,13 @@ final class EleSlider_Addon {
 	 * Enqueue scripts and styles.
 	 */
 	public function enqueue_scripts() {
-		// Register and enqueue CSS
+		// Register main slider assets
 		wp_register_style( 
 			'ele-slider-style', 
 			ELESLIDER_URL . 'assets/ele-style-slider.css', 
 			array(), 
 			ELESLIDER_VERSION 
 		);
-		wp_register_style( 
-			'ele-post-style', 
-			ELESLIDER_URL . 'assets/ele-style-post.css', 
-			array(), 
-			ELESLIDER_VERSION 
-		);
-
-		// Register and enqueue JS
 		wp_register_script( 
 			'ele-slider-script', 
 			ELESLIDER_URL . 'assets/ele-script.js', 
@@ -125,18 +117,90 @@ final class EleSlider_Addon {
 			true 
 		);
 
-		// Enqueue when needed
-		wp_enqueue_style( 'ele-slider-style' );
-		wp_enqueue_style( 'ele-post-style' );
-		wp_enqueue_script( 'ele-slider-script' );
+		// Register post widget assets
+		wp_register_style( 
+			'ele-post-style', 
+			ELESLIDER_URL . 'assets/ele-style-post.css', 
+			array(), 
+			ELESLIDER_VERSION 
+		);
+
+		// Register slider3 assets
+		wp_register_style( 
+			'ele-slider3-style', 
+			ELESLIDER_URL . 'assets/ele-slider3.css', 
+			array(), 
+			ELESLIDER_VERSION 
+		);
+		wp_register_script( 
+			'ele-slider3-script', 
+			ELESLIDER_URL . 'assets/ele-slider3.js', 
+			array( 'jquery' ), 
+			ELESLIDER_VERSION, 
+			true 
+		);
+
+		// Register slider4 assets (Swiper)
+		wp_register_style( 
+			'swiper-css', 
+			ELESLIDER_URL . 'assets/slider4/swiper-bundle.min.css', 
+			array(), 
+			ELESLIDER_VERSION 
+		);
+		wp_register_style( 
+			'ele-slider4-style', 
+			ELESLIDER_URL . 'assets/slider4/slider4.css', 
+			array( 'swiper-css' ), 
+			ELESLIDER_VERSION 
+		);
+		wp_register_script( 
+			'swiper-js', 
+			ELESLIDER_URL . 'assets/slider4/swiper-bundle.min.js', 
+			array(), 
+			ELESLIDER_VERSION, 
+			true 
+		);
+		wp_register_script( 
+			'ele-slider4-script', 
+			ELESLIDER_URL . 'assets/slider4/slider4.js', 
+			array( 'jquery', 'swiper-js' ), 
+			ELESLIDER_VERSION, 
+			true 
+		);
+
+		// Register ionicons for slider4
+		wp_register_script( 
+			'ionicons-esm', 
+			ELESLIDER_URL . 'assets/slider4/ionicons.esm.js', 
+			array(), 
+			ELESLIDER_VERSION, 
+			true 
+		);
+		wp_register_script( 
+			'ionicons', 
+			ELESLIDER_URL . 'assets/slider4/ionicons.js', 
+			array(), 
+			ELESLIDER_VERSION, 
+			true 
+		);
 	}
 
 	/**
 	 * Enqueue editor scripts.
 	 */
 	public function editor_scripts() {
+		// Enqueue all widget styles for editor preview
 		wp_enqueue_style( 'ele-slider-style' );
 		wp_enqueue_style( 'ele-post-style' );
+		wp_enqueue_style( 'ele-slider3-style' );
+		wp_enqueue_style( 'swiper-css' );
+		wp_enqueue_style( 'ele-slider4-style' );
+		
+		// Enqueue scripts for editor functionality
+		wp_enqueue_script( 'ele-slider-script' );
+		wp_enqueue_script( 'ele-slider3-script' );
+		wp_enqueue_script( 'swiper-js' );
+		wp_enqueue_script( 'ele-slider4-script' );
 	}
 }
 
