@@ -21,10 +21,10 @@ class EleSlider_slider_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_style_depends() {
-        return [ 'ele-style-slider', 'esp-icon' ];
+        return [ 'ele-style-slider' ];
     }
 
-    protected function _register_controls() {
+    protected function register_controls() {
         // Section for Slide Content
         $this->start_controls_section(
             'content_section',
