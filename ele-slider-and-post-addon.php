@@ -3,7 +3,7 @@
  * Plugin Name: Ele Slider and Post Addon
  * Description: Adds Elementor widgets: Ele Slider and Ele Post for creating beautiful and dynamic sliders and post displays within Elementor layouts.
  * Text Domain: ele-slider-and-post-addon
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: Soyeb Salar
  * Author URI: https://www.soyebsalar.in
  * License: GPLv2 or later
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants.
-define( 'ELESLIDER_AND_POST_VERSION', '2.0.1' );
+define( 'ELESLIDER_AND_POST_VERSION', '2.0.2' );
 define( 'ELESLIDER_AND_POST_URL', plugin_dir_url( __FILE__ ) );
 define( 'ELESLIDER_AND_POST_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ELESLIDER_AND_POST_BASENAME', plugin_basename( __FILE__ ) );
@@ -61,41 +61,21 @@ final class EleSlider_And_Post_Addon {
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 		
-		// Force clear Elementor cache on plugin activation/update.
-		register_activation_hook( __FILE__, array( $this, 'clear_elementor_cache' ) );
-		add_action( 'upgrader_process_complete', array( $this, 'clear_elementor_cache_on_update' ), 10, 2 );
+		// Safe cache clearing on activation without affecting Elementor
+		register_activation_hook( __FILE__, array( $this, 'on_activation' ) );
 	}
 
 	/**
-	 * Clear Elementor cache.
+	 * Plugin activation callback.
 	 */
-	public function clear_elementor_cache() {
-		if ( class_exists( '\Elementor\Plugin' ) ) {
-			\Elementor\Plugin::$instance->files_manager->clear_cache();
-		}
-		
-		// Clear WordPress cache if available.
+	public function on_activation() {
+		// Only clear basic WordPress cache, don't touch Elementor
 		if ( function_exists( 'wp_cache_flush' ) ) {
 			wp_cache_flush();
 		}
 		
-		// Force widgets re-registration.
-		delete_transient( 'elementor_widgets_cache' );
-		delete_option( 'elementor_controls_usage' );
-	}
-
-	/**
-	 * Clear cache on plugin update.
-	 *
-	 * @param object $upgrader_object WP_Upgrader instance.
-	 * @param array  $options Array of bulk item update data.
-	 */
-	public function clear_elementor_cache_on_update( $upgrader_object, $options ) {
-		if ( isset( $options['action'] ) && 'update' === $options['action'] && 
-			 isset( $options['type'] ) && 'plugin' === $options['type'] &&
-			 isset( $options['plugins'] ) && in_array( ELESLIDER_AND_POST_BASENAME, $options['plugins'], true ) ) {
-			$this->clear_elementor_cache();
-		}
+		// Set activation notice
+		set_transient( 'eleslider_activation_notice', true, 30 );
 	}
 
 	/**
@@ -133,18 +113,8 @@ final class EleSlider_And_Post_Addon {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
 		add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_editor_assets' ) );
 		
-		// Force refresh widgets list in Elementor editor.
-		add_action( 'elementor/init', array( $this, 'force_refresh_widgets' ) );
-	}
-
-	/**
-	 * Force refresh widgets list.
-	 */
-	public function force_refresh_widgets() {
-		// Clear widgets cache to ensure new widget definitions are loaded.
-		if ( class_exists( '\Elementor\Plugin' ) ) {
-			\Elementor\Plugin::$instance->widgets_manager->clear_cache();
-		}
+		// Activation notice.
+		add_action( 'admin_notices', array( $this, 'activation_notice' ) );
 	}
 
 	/**
@@ -152,6 +122,29 @@ final class EleSlider_And_Post_Addon {
 	 */
 	public function load_textdomain() {
 		load_plugin_textdomain( 'ele-slider-and-post-addon', false, dirname( ELESLIDER_AND_POST_BASENAME ) . '/languages' );
+	}
+
+	/**
+	 * Show activation notice.
+	 */
+	public function activation_notice() {
+		if ( get_transient( 'eleslider_activation_notice' ) ) {
+			delete_transient( 'eleslider_activation_notice' );
+			?>
+			<div class="notice notice-success is-dismissible">
+				<h3><?php esc_html_e( '🎉 Ele Slider and Post Addon Activated!', 'ele-slider-and-post-addon' ); ?></h3>
+				<p><?php esc_html_e( 'The plugin has been successfully activated. You can now find the "Ele Kit" widgets in your Elementor editor.', 'ele-slider-and-post-addon' ); ?></p>
+				<p><strong><?php esc_html_e( 'Available Widgets:', 'ele-slider-and-post-addon' ); ?></strong></p>
+				<ul style="list-style: disc; margin-left: 20px;">
+					<li><?php esc_html_e( 'Ele Slider - Advanced image slider with customizable controls', 'ele-slider-and-post-addon' ); ?></li>
+					<li><?php esc_html_e( 'Ele Post - Dynamic post grid with query options', 'ele-slider-and-post-addon' ); ?></li>
+					<li><?php esc_html_e( 'Ele Slider3 - Gallery slider with lightbox effect', 'ele-slider-and-post-addon' ); ?></li>
+					<li><?php esc_html_e( 'Ele Slider4 - Swiper-based slider with modern transitions', 'ele-slider-and-post-addon' ); ?></li>
+				</ul>
+				<p><em><?php esc_html_e( 'If you encounter any issues, please go to Elementor > Tools > Regenerate CSS to refresh the styles.', 'ele-slider-and-post-addon' ); ?></em></p>
+			</div>
+			<?php
+		}
 	}
 
 	/**
@@ -231,24 +224,26 @@ final class EleSlider_And_Post_Addon {
 	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
 	 */
 	public function register_widgets( $widgets_manager ) {
-		// Ensure clean widget registration.
+		// Include widget files safely.
 		$this->include_widget_files();
 
-		// Register widgets with unique instances.
-		if ( class_exists( 'EleSlider_Slider_Widget' ) ) {
-			$widgets_manager->register( new \EleSlider_Slider_Widget() );
-		}
-		
-		if ( class_exists( 'EleSlider_Post_Widget' ) ) {
-			$widgets_manager->register( new \EleSlider_Post_Widget() );
-		}
-		
-		if ( class_exists( 'EleSlider_Slider3_Widget' ) ) {
-			$widgets_manager->register( new \EleSlider_Slider3_Widget() );
-		}
-		
-		if ( class_exists( 'EleSlider_Slider4_Widget' ) ) {
-			$widgets_manager->register( new \EleSlider_Slider4_Widget() );
+		// Register widgets only if classes exist and not already registered.
+		$widgets = array(
+			'EleSlider_Slider_Widget',
+			'EleSlider_Post_Widget', 
+			'EleSlider_Slider3_Widget',
+			'EleSlider_Slider4_Widget'
+		);
+
+		foreach ( $widgets as $widget_class ) {
+			if ( class_exists( $widget_class ) ) {
+				try {
+					$widgets_manager->register( new $widget_class() );
+				} catch ( Exception $e ) {
+					// Silently skip if widget can't be registered
+					error_log( 'Ele Slider Widget Registration Error: ' . $e->getMessage() );
+				}
+			}
 		}
 	}
 
@@ -265,8 +260,13 @@ final class EleSlider_And_Post_Addon {
 
 		foreach ( $widget_files as $file ) {
 			$file_path = ELESLIDER_AND_POST_PATH . 'widgets/' . $file;
-			if ( file_exists( $file_path ) ) {
-				require_once $file_path;
+			if ( file_exists( $file_path ) && is_readable( $file_path ) ) {
+				try {
+					require_once $file_path;
+				} catch ( Exception $e ) {
+					// Log error but don't break execution
+					error_log( 'Ele Slider Widget File Include Error (' . $file . '): ' . $e->getMessage() );
+				}
 			}
 		}
 	}
