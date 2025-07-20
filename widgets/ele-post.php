@@ -21,10 +21,10 @@ class EleSlider_Post_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_style_depends() {
-        return [ 'ele-style-post', 'esp-icon' ];
+        return [ 'ele-style-post' ];
     }
 
-    protected function _register_controls() {
+    protected function register_controls() {
         // Content Section
         $this->start_controls_section(
             'content_section',

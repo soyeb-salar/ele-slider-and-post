@@ -43,10 +43,10 @@ function eleslider_register_widgets( $widgets_manager ) {
     require_once( __DIR__ . '/widgets/ele-slider3.php' );
     require_once( __DIR__ . '/widgets/ele-slider4.php' );
 
-    $widgets_manager->register( new \EleSlider_Slider_Widget() );
+    $widgets_manager->register( new \EleSlider_slider_Widget() );
     $widgets_manager->register( new \EleSlider_Post_Widget() );
-    $widgets_manager->register( new \EleSlider_Slider3_Widget() );
-    $widgets_manager->register( new \EleSlider_Slider4_Widget() );
+    $widgets_manager->register( new \EleSlider_slider3_Widget() );
+    $widgets_manager->register( new \EleSlider_slider4_Widget() );
 }
 add_action( 'elementor/widgets/register', 'eleslider_register_widgets' );
 
