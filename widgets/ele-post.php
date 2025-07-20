@@ -48,7 +48,7 @@ class EleSlider_Post_Widget extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return array( 'ele-kit' );
+		return array( 'ele-addons' );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class EleSlider_Post_Widget extends \Elementor\Widget_Base {
 	 * @return array Style dependencies.
 	 */
 	public function get_style_depends() {
-		return array( 'ele-style-post' );
+		return array( 'ele-post-style' );
 	}
 
 	/**
