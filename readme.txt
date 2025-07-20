@@ -1,198 +1,109 @@
-=== Ele Slider and Post Addon ===
+=== Ele Slider and Post addon ===
 Author: Soyeb Salar
 Contributors: soyebsalar
 Donate link: https://soyebsalar.in/donate/
-Tags: elementor, slider, post, widget, grid, carousel, responsive
+Tags: elementor, slider, post, widget
 Requires at least: 5.6
 Tested up to: 6.7
-Requires PHP: 7.4
-Stable tag: 2.0.0
+Requires PHP: 7.0
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Elementor tested up to: 3.25.0
-Elementor Pro tested up to: 3.25.0
 
-A modern, secure, and feature-rich Elementor addon providing beautiful slider and post display widgets with advanced customization options.
+Ele Slider and Post is an Elementor add-on with two widgets for adding sliders and displaying posts effortlessly.
 
 == Description ==
 
-**Ele Slider and Post Addon** is a comprehensive WordPress Elementor add-on plugin that provides four powerful widgets for creating stunning sliders and post displays. This plugin follows WordPress coding standards and includes advanced security features.
+Ele Slider and Post is a versatile WordPress Elementor add-on plugin that provides two useful widgets: **Ele Slider** and **Ele Post**. These widgets allow you to easily create beautiful and dynamic sliders and post displays within your Elementor layouts.
 
-### ✨ Key Features:
+### Ele Slider Widget:
+- **Image**: Add an image to each slide with a customizable background.
+- **Title**: Display a title over the slide with various styling options.
+- **Description**: Include a description under the title, fully customizable.
+- **Button**: Add a button with text and link, fully customizable.
+- **Navigation**: Includes navigation buttons (next and previous).
+- **Box Shadow**: Add shadow to the slider with customizable color, opacity, horizontal and vertical offset, blur, and spread.
 
-**🎨 Modern & Responsive Design**
-* Fully responsive layouts that work on all devices
-* Clean, modern design that fits any theme
-* Smooth animations and transitions
-* Touch-friendly navigation for mobile devices
+### Ele Post Widget:
+- **Post Type**: Choose from default WordPress posts or custom post types.
+- **Category**: Filter posts by category.
+- **Post Metadata**: Display metadata like the date, author, etc.
+- **Box Shadow**: Add shadow to the posts with customizable color, opacity, horizontal and vertical offset, blur, and spread.
 
-**🔒 Security & Performance**
-* Follows WordPress coding standards
-* Proper data sanitization and validation
-* Secure output escaping
-* Optimized performance with conditional loading
-
-**🛠️ Developer Friendly**
-* Latest Elementor compatibility (3.25.0+)
-* Clean, documented code
-* Proper hooks and filters
-* Translation ready
-
-### 📦 Included Widgets:
-
-#### 1. **Ele Slider Widget**
-- **Advanced Repeater Controls**: Add unlimited slides with easy management
-- **Rich Content Options**: Title, description, background image, and call-to-action buttons
-- **Smart Navigation**: Previous/next arrows with customizable styles
-- **Dot Pagination**: Interactive pagination dots
-- **Autoplay Settings**: Configurable autoplay with custom delays
-- **Responsive Controls**: Different settings for desktop, tablet, and mobile
-- **Advanced Styling**: Typography, colors, spacing, borders, and shadows
-
-#### 2. **Ele Post Widget**
-- **Flexible Post Queries**: Support for any post type (posts, pages, custom post types)
-- **Advanced Filtering**: Filter by categories, tags, or exclude specific posts
-- **Grid Layouts**: 1-4 column responsive grid layouts
-- **Content Control**: Show/hide featured images, titles, excerpts, meta data
-- **Smart Excerpts**: Configurable excerpt length with proper word trimming
-- **Custom Read More**: Customizable read more buttons with styling options
-- **Meta Information**: Display post date, author with custom separators
-- **Image Controls**: Multiple image sizes and aspect ratios
-
-#### 3. **Ele Slider 3**
-- **Gallery Showcase**: Beautiful gallery-style slider with thumbnails
-- **Interactive Navigation**: Click on thumbnails to change main display
-- **Modern Animations**: Smooth transitions and hover effects
-- **Customizable Layout**: Flexible positioning and sizing options
-
-#### 4. **Ele Slider 4**
-- **Swiper Integration**: Powered by Swiper.js for advanced effects
-- **Multiple Effects**: Slide, fade, cube, coverflow, and flip transitions
-- **Advanced Controls**: Loop, autoplay, navigation, and pagination
-- **Touch Support**: Full touch and swipe gesture support
-- **Keyboard Navigation**: Arrow key navigation support
-
-### 🎯 Perfect For:
-
-* **Business Websites**: Showcase services, testimonials, or portfolio items
-* **Blogs & News Sites**: Display featured posts and articles
-* **E-commerce Stores**: Product showcases and promotional content
-* **Portfolio Sites**: Image galleries and project showcases
-* **Corporate Sites**: Team members, company achievements, case studies
-
-### 🚀 Performance Optimized:
-
-* **Conditional Loading**: Scripts and styles load only when widgets are used
-* **Optimized Assets**: Minified CSS and JavaScript files
-* **Modern Code**: Uses latest web standards and best practices
-* **Cache Friendly**: Proper caching support for better performance
+Watch the video demonstration for a detailed walkthrough: [https://www.youtube.com/watch?v=pnGpNQ-kwNs](https://youtu.be/pnGpNQ-kwNs?si=hZfMliPLVZQWG8Ki)
 
 == Installation ==
 
-### Automatic Installation:
-1. Log in to your WordPress admin panel
-2. Go to Plugins → Add New
-3. Search for "Ele Slider and Post Addon"
-4. Click "Install Now" and then "Activate"
-
-### Manual Installation:
-1. Download the plugin ZIP file
-2. Upload the plugin folder to `/wp-content/plugins/` directory
-3. Activate the plugin through the 'Plugins' menu in WordPress
-4. Start using the widgets in Elementor editor
-
-### Using the Widgets:
-1. Edit any page/post with Elementor
-2. Look for "Ele Kit" category in the widget panel
-3. Drag and drop any of the four available widgets
-4. Customize settings according to your needs
-5. Publish and enjoy your beautiful sliders and post displays!
+1. Upload the plugin folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Use the Ele Slider and Post widgets from Elementor.
 
 == Frequently Asked Questions ==
 
 = What is this plugin? =
-This plugin adds four modern Elementor widgets: Ele Slider, Ele Post, Ele Slider 3, and Ele Slider 4, each designed for different content display needs.
 
-= Does it work with any theme? =
-Yes! The plugin is designed to work with any WordPress theme that supports Elementor.
+This plugin adds two Elementor widgets, **Ele Slider** and **Ele Post**, to enhance your content display options.
 
-= Is it compatible with the latest Elementor version? =
-Yes, the plugin is fully compatible with Elementor 3.25.0 and later versions.
+= How do I use the Ele Slider Widget? =
 
-= Can I customize the appearance? =
-Absolutely! Each widget comes with extensive styling options including typography, colors, spacing, borders, and animations.
+1. Open the Elementor editor and add the **Ele Slider** widget.
+2. Customize your slides with images, titles, descriptions, and buttons.
+3. Style the widget using Elementor's design options.
 
-= Does it work on mobile devices? =
-Yes, all widgets are fully responsive and touch-friendly for optimal mobile experience.
+= How do I use the Ele Post Widget? =
 
-= Is the plugin translation ready? =
-Yes, the plugin is translation ready and uses proper WordPress translation functions.
-
-= How do I get support? =
-You can get support through the WordPress plugin repository or visit our website for additional help.
+1. Open the Elementor editor and add the **Ele Post** widget.
+2. Select the post type and category.
+3. Customize the metadata and other settings.
 
 == Screenshots ==
 
-1. **Ele Slider Widget** - Modern slider with navigation and pagination
-2. **Ele Post Widget** - Responsive post grid with various layout options
-3. **Widget Settings** - Comprehensive customization options in Elementor
-4. **Mobile Responsive** - Perfect display on all device sizes
-5. **Ele Slider 3** - Gallery-style slider with thumbnail navigation
-6. **Ele Slider 4** - Advanced slider with Swiper.js integration
+1. **Ele Slider Widget in Action**
+   ![Ele Slider Widget](screenshot-1.gif)
+   *Description*: A live preview of the Ele Slider widget in action, showcasing customizable slides with navigation buttons for a dynamic user experience.
+
+2. **Customizing Slides in Ele Slider Widget**
+   ![Ele Slider Customization](screenshot-2.jpg)
+   *Description*: Demonstrates how to customize slides in the Ele Slider widget, including adding images, titles, descriptions, and buttons.
+
+3. **Ele Post Widget Displaying Posts**
+   ![Ele Post Widget](screenshot-3.jpg)
+   *Description*: The Ele Post widget displays posts with metadata like author and date, enhanced by customizable box-shadow effects.
+
+4. **How to Add Slides in Ele Slider**
+   ![Add Slides in Ele Slider](screenshot-4.jpg)
+   *Description*: Step-by-step guide on adding new slides with images, titles, and buttons in the Ele Slider widget.
+
+5. **Ele Slider with Titles, Descriptions, Buttons, and Images**
+   ![Ele Slider with Elements](screenshot-5.jpg)
+   *Description*: A detailed look at how the Ele Slider widget integrates multiple elements, such as titles, descriptions, buttons, and images, for an enriched display.
+
+6. **Global Settings for Ele Slider**
+   ![Global Settings for Slider](screenshot-6.jpg)
+   *Description*: Explores the global settings available for the Ele Slider widget, including box-shadow, slider dimensions, and typography options.
+
+7. **Ele Post Widget with Custom Post Types**
+   ![Ele Post with CPT](screenshot-7.jpg)
+   *Description*: Demonstrates how the Ele Post widget can display content from custom post types, allowing for versatile content layouts.
+
+8. **Typography and Box Shadow Settings for Ele Slider**
+   ![Typography and Shadow](screenshot-8.jpg)
+   *Description*: Highlights typography and box-shadow settings in the Ele Slider widget, enabling precise control over text and design aesthetics.
+
+9. **Adding Ele Slider and Post Widgets in Elementor**
+   ![Adding Widgets in Elementor](screenshot-9.jpg)
+   *Description*: A tutorial showing how to add the Ele Slider and Ele Post widgets to your Elementor layout for seamless integration.
 
 == Changelog ==
 
-= 2.0.0 - 2024-12-19 =
-**🎉 Major Update - Complete Rewrite for Modern Standards**
-
-**✨ New Features:**
-* Complete code rewrite following WordPress coding standards
-* Enhanced security with proper sanitization and validation
-* Latest Elementor compatibility (3.25.0+)
-* Improved responsive design for all devices
-* Advanced styling options for all widgets
-* Better performance with optimized asset loading
-* Translation ready with proper text domains
-
-**🔧 Improvements:**
-* Fixed deprecated `_register_controls()` method
-* Updated to use `register_controls()` for Elementor compatibility
-* Enhanced post widget with advanced query options
-* Added responsive grid layouts (1-4 columns)
-* Improved slider navigation and pagination
-* Better keyboard and touch navigation support
-* Modern CSS with flexbox and grid layouts
-
-**🐛 Bug Fixes:**
-* Fixed all PHP and JavaScript errors
-* Resolved widget icon issues
-* Fixed asset loading problems
-* Improved cross-browser compatibility
-* Fixed mobile responsiveness issues
-
-**🔒 Security Enhancements:**
-* Added proper nonce verification
-* Implemented data sanitization
-* Added output escaping for all user inputs
-* Enhanced access control checks
-
-= 1.0.0 =
-* Initial release with basic slider and post widgets
+= 1.0 =
+* Initial release of Ele Slider and Post widget plugin.
 
 == Upgrade Notice ==
 
-= 2.0.0 =
-Major update with complete rewrite for modern standards. Backup your site before updating. This version includes breaking changes but provides much better security, performance, and Elementor compatibility.
+= 1.0 =
+* Initial release. No upgrades available yet.
 
 == Support ==
 
-For support and feature requests, please visit:
-* Plugin Support: WordPress.org support forums
-* Author Website: https://www.soyebsalar.in
-* Donate: https://soyebsalar.in/donate/
-
-== Credits ==
-
-* Swiper.js library for advanced slider functionality
-* Font Awesome icons for navigation elements
-* WordPress and Elementor communities for inspiration and feedback
+For support or feature requests, please contact Soyeb Salar at soyebsalar@gmail.com.
