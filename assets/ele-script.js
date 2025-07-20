@@ -1,129 +1,52 @@
-/* Original Ele Slider JavaScript */
 jQuery(document).ready(function($) {
-    
-    // Initialize all sliders
-    $('.ele-slider-wrapper').each(function() {
-        var slider = $(this);
-        var slides = slider.find('.ele-slider-slide');
-        var currentSlide = 0;
-        var autoplay = slider.data('autoplay') === 'true' || slider.data('autoplay') === true;
-        var speed = parseInt(slider.data('speed')) || 3000;
-        var autoplayTimer;
-        
-        // Show first slide
-        if (slides.length > 0) {
-            slides.first().addClass('active');
-        }
-        
-        // Update pagination
-        function updatePagination() {
-            slider.find('.ele-slider-dot').removeClass('active');
-            slider.find('.ele-slider-dot').eq(currentSlide).addClass('active');
-        }
-        
-        // Go to specific slide
-        function goToSlide(index) {
-            if (index >= slides.length) index = 0;
-            if (index < 0) index = slides.length - 1;
-            
-            slides.removeClass('active');
-            slides.eq(index).addClass('active');
-            currentSlide = index;
-            updatePagination();
-        }
-        
-        // Next slide
-        function nextSlide() {
-            goToSlide(currentSlide + 1);
-        }
-        
-        // Previous slide
-        function prevSlide() {
-            goToSlide(currentSlide - 1);
-        }
-        
-        // Start autoplay
-        function startAutoplay() {
-            if (autoplay && slides.length > 1) {
-                autoplayTimer = setInterval(nextSlide, speed);
-            }
-        }
-        
-        // Stop autoplay
-        function stopAutoplay() {
-            if (autoplayTimer) {
-                clearInterval(autoplayTimer);
-            }
-        }
-        
-        // Navigation arrows
-        slider.find('.ele-slider-prev').click(function() {
-            stopAutoplay();
-            prevSlide();
-            startAutoplay();
-        });
-        
-        slider.find('.ele-slider-next').click(function() {
-            stopAutoplay();
-            nextSlide();
-            startAutoplay();
-        });
-        
-        // Pagination dots
-        slider.find('.ele-slider-dot').click(function() {
-            var index = $(this).data('slide');
-            stopAutoplay();
-            goToSlide(index);
-            startAutoplay();
-        });
-        
-        // Pause on hover
-        slider.hover(
-            function() {
-                stopAutoplay();
-            },
-            function() {
-                startAutoplay();
-            }
-        );
-        
-        // Keyboard navigation
-        $(document).keydown(function(e) {
-            if (slider.is(':hover')) {
-                if (e.keyCode === 37) { // Left arrow
-                    stopAutoplay();
-                    prevSlide();
-                    startAutoplay();
-                } else if (e.keyCode === 39) { // Right arrow
-                    stopAutoplay();
-                    nextSlide();
-                    startAutoplay();
-                }
-            }
-        });
-        
-        // Start autoplay
-        startAutoplay();
-        
-        // Initial pagination update
-        updatePagination();
+   
+// Function to initialize slider functionality for a specific slider container
+function initializeSlider(sliderContainer) {
+    // Select the next and previous buttons within the specific slider container
+    let next = sliderContainer.querySelector('.next');
+    let prev = sliderContainer.querySelector('.prev');
+
+    // Event listener for the next button
+    next.addEventListener('click', function() {
+        let items = sliderContainer.querySelectorAll('.ele-item');
+        // Move the first item to the end of the slider container
+        sliderContainer.querySelector('.ele-slide').appendChild(items[0]);
     });
-    
-    // Elementor editor compatibility
-    if (typeof elementor !== 'undefined') {
-        elementor.hooks.addAction('panel/open_editor/widget/ele-slider', function(panel, model, view) {
-            // Reinitialize sliders when widget is edited
-            setTimeout(function() {
-                $('.ele-slider-wrapper').each(function() {
-                    // Simple reinitialization for editor
-                    var slider = $(this);
-                    var slides = slider.find('.ele-slider-slide');
-                    slides.removeClass('active');
-                    if (slides.length > 0) {
-                        slides.first().addClass('active');
-                    }
-                });
-            }, 100);
-        });
-    }
+
+    // Event listener for the previous button
+    prev.addEventListener('click', function() {
+        let items = sliderContainer.querySelectorAll('.ele-item');
+        // Move the last item to the beginning of the slider container
+        sliderContainer.querySelector('.ele-slide').prepend(items[items.length - 1]);
+    });
+}
+
+// Initialize each slider individually
+document.querySelectorAll('.ele-container').forEach(slider => initializeSlider(slider));
+
+
+
+// Function to initialize slider functionality for a specific slider container
+function initializePostSlider(sliderContainer) {
+    // Select the next and previous buttons within the specific slider container
+    let nextpost = sliderContainer.querySelector('.nextpost');
+    let prevpost = sliderContainer.querySelector('.prevpost');
+
+    // Event listener for the next button
+    nextpost.addEventListener('click', function() {
+        let items = sliderContainer.querySelectorAll('.ele-item-post');
+        // Move the first item to the end of the slider container
+        sliderContainer.querySelector('.ele-slide-post').appendChild(items[0]);
+    });
+
+    // Event listener for the previous button
+    prevpost.addEventListener('click', function() {
+        let items = sliderContainer.querySelectorAll('.ele-item-post');
+        // Move the last item to the beginning of the slider container
+        sliderContainer.querySelector('.ele-slide-post').prepend(items[items.length - 1]);
+    });
+}
+
+// Initialize the sliders
+document.querySelectorAll('.ele-container-post').forEach(slider => initializePostSlider(slider));
 });
